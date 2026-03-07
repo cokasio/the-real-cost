@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>See The Machine — 60 Seconds of Clarity</title>
+<meta name="description" content="They keep you too broke and too tired to see the machine. Here's the machine. Every number sourced. Every claim linked.">
+<meta property="og:title" content="See The Machine — They don't want you to see all of it at once">
+<meta property="og:description" content="6 feedback loops. One machine. $3,400/yr from your pocket. Every number sourced.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #EF4444;
+  --red-dark: #991B1B;
+  --red-glow: rgba(239,68,68,0.25);
+  --white: #F1F5F9;
+  --white-dim: #94A3B8;
+  --gray: #475569;
+  --bg: #05050A;
+  --bg-card: #0C0C14;
+  --border: rgba(255,255,255,0.05);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--font-body);line-height:1.7;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+a{color:var(--red);text-decoration:none;border-bottom:1px solid rgba(239,68,68,0.3);transition:all 0.2s}
+a:hover{color:var(--white);border-color:var(--white)}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+strong{color:var(--white);font-weight:700}
+
+/* ═══ HERO ═══ */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 24px;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,rgba(239,68,68,0.06) 0%,transparent 70%);pointer-events:none}
+.hero-overline{font-family:var(--font-mono);font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:32px;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero h1{font-family:var(--font-display);font-size:clamp(40px,8vw,90px);font-weight:900;line-height:1;margin-bottom:40px;opacity:0;animation:fadeUp .8s .4s forwards}
+.hero h1 em{font-style:normal;color:var(--red);display:block;font-size:clamp(44px,9vw,100px);text-shadow:0 0 80px var(--red-glow)}
+.hero-body{font-size:clamp(16px,2.2vw,20px);color:var(--white-dim);max-width:600px;line-height:1.8;font-weight:300;opacity:0;animation:fadeUp .8s .6s forwards}
+.hero-body strong{color:var(--white)}
+.scroll-line{position:absolute;bottom:40px;left:50%;width:1px;height:48px;background:linear-gradient(to bottom,var(--gray),transparent);animation:pulse 2s infinite}
+
+/* ═══ WAR TICKER ═══ */
+.war-ticker{background:var(--red-dark);padding:14px 0;overflow:hidden;border-top:2px solid var(--red);border-bottom:2px solid var(--red)}
+.ticker-track{display:flex;gap:64px;animation:tickerScroll 50s linear infinite;white-space:nowrap;width:max-content}
+.ticker-item{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--white)}
+.ticker-item b{color:#FCA5A5}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══ SECTIONS ═══ */
+section{padding:120px 0;position:relative}
+.section-num{font-family:var(--font-mono);font-size:11px;letter-spacing:4px;color:var(--red);text-transform:uppercase;margin-bottom:12px}
+.section-title{font-family:var(--font-display);font-size:clamp(36px,6vw,64px);font-weight:900;line-height:1.05;margin-bottom:16px}
+.section-subtitle{font-size:18px;color:var(--white-dim);max-width:600px;margin-bottom:48px;font-weight:300;line-height:1.8}
+
+/* ═══ FOG ═══ */
+.fog-section{background:linear-gradient(180deg,var(--bg) 0%,rgba(239,68,68,0.03) 50%,var(--bg) 100%)}
+.fog-text{font-size:clamp(16px,2vw,19px);color:var(--white-dim);line-height:1.9;margin-bottom:28px;max-width:700px}
+.highlight{color:var(--red);font-weight:700}
+.fog-cycle{text-align:center;padding:40px;margin:40px 0;border:1px solid var(--border);background:var(--bg-card);font-family:var(--font-mono);font-size:15px;line-height:2.4;color:var(--white-dim);border-radius:4px}
+
+/* ═══ MACHINE ═══ */
+.machine-section{background:var(--bg-card)}
+.machine-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:48px 0;position:relative}
+.connector-svg{display:none}
+.loop-card{background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all .3s}
+.loop-card:hover{border-color:rgba(239,68,68,0.25);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.5)}
+.loop-header{padding:20px 20px 12px;display:flex;align-items:center;gap:12px}
+.loop-number{font-family:var(--font-mono);font-size:11px;color:var(--red);background:rgba(239,68,68,0.1);padding:4px 8px;border-radius:3px;letter-spacing:1px}
+.loop-header h3{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.loop-steps{list-style:none;padding:0 20px 16px;position:relative}
+.loop-steps::before{content:'';position:absolute;left:26px;top:0;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--red),rgba(239,68,68,0.1))}
+.loop-steps li{font-size:13px;color:var(--white-dim);padding:4px 0 4px 24px;position:relative;line-height:1.6}
+.loop-steps li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:var(--red);border:2px solid var(--bg)}
+.loop-feedback{font-family:var(--font-mono);font-size:11px;color:var(--red);padding:12px 20px;background:rgba(239,68,68,0.04);border-top:1px solid rgba(239,68,68,0.1);letter-spacing:0.5px;line-height:1.6}
+.feedback-icon{margin-right:6px}
+.machine-center{text-align:center;padding:48px 24px;margin:32px 0;font-family:var(--font-mono);font-size:clamp(14px,2vw,18px);letter-spacing:2px;line-height:2;color:var(--white-dim);border:1px solid rgba(239,68,68,0.15);background:rgba(239,68,68,0.03)}
+.machine-center strong{color:var(--red);font-size:clamp(18px,3vw,24px)}
+.machine-compound{max-width:700px;margin:0 auto;text-align:center}
+.machine-compound p{font-size:clamp(16px,2vw,20px);color:var(--white-dim);margin-bottom:16px;line-height:1.8}
+.compound-kicker{font-family:var(--font-display);font-size:clamp(22px,3vw,32px)!important;color:var(--white)!important;margin-top:32px!important;font-weight:900}
+
+/* ═══ NUMBERS ═══ */
+.numbers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:40px 0}
+.number-card{background:var(--bg-card);border:1px solid var(--border);padding:28px 20px;border-radius:6px;transition:all .3s;position:relative;overflow:hidden}
+.number-card:hover{border-color:rgba(239,68,68,0.2);transform:translateY(-2px)}
+.number-card.highlight-red{border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04)}
+.number-card.featured{grid-column:1/-1;text-align:center;border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04);padding:40px}
+.number-value{font-family:var(--font-mono);font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--red);line-height:1;margin-bottom:8px}
+.number-unit{font-size:0.5em;color:var(--white-dim)}
+.number-label{font-size:13px;color:var(--white-dim);line-height:1.5;margin-bottom:10px}
+.number-source{font-family:var(--font-mono);font-size:10px;color:var(--gray);border-bottom:1px solid rgba(71,85,105,0.3)}
+.number-source:hover{color:var(--red)}
+.compound-breakdown{background:var(--bg-card);border:2px solid rgba(239,68,68,0.2);border-radius:8px;padding:40px;margin:48px 0}
+.breakdown-title{font-family:var(--font-mono);font-size:13px;letter-spacing:2px;color:var(--red);margin-bottom:24px}
+.breakdown-table{width:100%;border-collapse:collapse}
+.breakdown-table td{padding:10px 0;font-size:15px;border-bottom:1px solid var(--border)}
+.breakdown-item{color:var(--white-dim)}
+.breakdown-cost{text-align:right;font-family:var(--font-mono);font-weight:700;color:var(--white)}
+.breakdown-total td{border-bottom:none;border-top:2px solid var(--red);padding-top:16px;font-size:17px}
+.breakdown-total .breakdown-cost{color:var(--red);font-size:20px}
+.breakdown-kicker{margin-top:24px;font-size:16px;color:var(--white-dim);text-align:center}
+
+/* ═══ LIES ═══ */
+.lies-section{background:var(--bg-card)}
+.lie-block{display:grid;grid-template-columns:1fr 1.5fr;gap:32px;padding:40px 0;border-bottom:1px solid var(--border)}
+.lie-block:last-child{border-bottom:none}
+.lie-label,.math-label{font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:12px}
+.lie-label{color:var(--gray)}
+.math-label{color:var(--red)}
+.the-lie blockquote{font-family:var(--font-display);font-size:clamp(18px,2.5vw,24px);color:var(--white-dim);font-style:italic;line-height:1.4}
+.the-math p{font-size:15px;color:var(--white-dim);line-height:1.8}
+.source-link{font-family:var(--font-mono);font-size:10px;color:var(--gray);display:inline-block;margin-top:12px}
+
+/* ═══ HISTORY ═══ */
+.history-card{padding:40px 0;border-bottom:1px solid var(--border)}
+.history-card:last-of-type{border-bottom:none}
+.history-place{font-family:var(--font-mono);font-size:13px;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:16px}
+.history-text{font-size:clamp(15px,1.8vw,18px);color:var(--white-dim);line-height:1.9;max-width:700px;margin-bottom:16px}
+.history-lesson{padding:40px;margin:40px 0;border:1px solid rgba(239,68,68,0.2);background:rgba(239,68,68,0.03);border-radius:6px;text-align:center}
+.history-lesson p{font-size:clamp(16px,2vw,20px);color:var(--white-dim);line-height:1.8}
+.rule-block{text-align:center;padding:48px;margin:40px 0;background:var(--bg-card);border:1px solid var(--border);border-radius:6px}
+.rule-block h3{font-family:var(--font-mono);font-size:14px;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:20px}
+.rule-block p{font-size:16px;color:var(--white-dim);line-height:1.8;margin-bottom:12px}
+.rule-block a{font-family:var(--font-mono);font-size:11px;color:var(--gray)}
+
+/* ═══ SHARE ═══ */
+.share-section{text-align:center;padding:80px 24px}
+.share-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:40px 0}
+.share-btn{font-family:var(--font-mono);font-size:12px;letter-spacing:1px;padding:14px 28px;border:1px solid var(--border);background:var(--bg-card);color:var(--white);border-radius:4px;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.share-btn:hover{border-color:var(--white);transform:translateY(-2px)}
+#copyConfirm{font-family:var(--font-mono);font-size:12px;color:var(--red);margin-top:8px}
+footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border)}
+footer p{font-family:var(--font-mono);font-size:10px;color:var(--gray);line-height:2.2}
+footer a{color:var(--gray);font-size:10px}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.8}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px){
+  section{padding:80px 0}
+  .machine-grid{grid-template-columns:1fr}
+  .lie-block{grid-template-columns:1fr;gap:16px}
+  .numbers-grid{grid-template-columns:repeat(2,1fr)}
+  .compound-breakdown{padding:24px}
+}
+@media(max-width:480px){
+  .numbers-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-overline">60 seconds of clarity</div>
+  <h1>
+    They keep you too broke<br>and too tired to see
+    <em>the machine.</em>
+  </h1>
+  <p class="hero-body">
+    <strong>Here's the machine.</strong><br>
+    Every number sourced. Every claim linked.<br>
+    Not left vs right. <strong>People vs the people robbing them.</strong>
+  </p>
+  <div class="scroll-line"></div>
+</section>
+
+<!-- ═══ WAR TICKER ═══ -->
+<div class="war-ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">IRAN WAR DAY <b>8</b> — NO CONGRESSIONAL AUTHORIZATION</span>
+    <span class="ticker-item"><b>168</b> GIRLS KILLED IN MINAB SCHOOL STRIKE</span>
+    <span class="ticker-item">WAR COST: <b>$1 BILLION/DAY</b></span>
+    <span class="ticker-item"><b>6</b> US SERVICE MEMBERS DEAD</span>
+    <span class="ticker-item">GAS: <b>$3.32/GAL</b> AND RISING</span>
+    <span class="ticker-item">STRAIT OF HORMUZ <b>CLOSED</b> — 20% GLOBAL OIL</span>
+    <span class="ticker-item">WAR POWERS VOTE FAILED BY <b>7 VOTES</b></span>
+    <span class="ticker-item">UNESCO: <b>"GRAVE VIOLATION OF HUMANITARIAN LAW"</b></span>
+    <span class="ticker-item">IRAN WAR DAY <b>8</b> — NO CONGRESSIONAL AUTHORIZATION</span>
+    <span class="ticker-item"><b>168</b> GIRLS KILLED IN MINAB SCHOOL STRIKE</span>
+    <span class="ticker-item">WAR COST: <b>$1 BILLION/DAY</b></span>
+    <span class="ticker-item"><b>6</b> US SERVICE MEMBERS DEAD</span>
+    <span class="ticker-item">GAS: <b>$3.32/GAL</b> AND RISING</span>
+    <span class="ticker-item">STRAIT OF HORMUZ <b>CLOSED</b> — 20% GLOBAL OIL</span>
+    <span class="ticker-item">WAR POWERS VOTE FAILED BY <b>7 VOTES</b></span>
+    <span class="ticker-item">UNESCO: <b>"GRAVE VIOLATION OF HUMANITARIAN LAW"</b></span>
+  </div>
+</div>
+
+<!-- ═══ THE FOG ═══ -->
+<section class="fog-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">01 — The Fog</div>
+      <h2 class="section-title">They Keep You So Busy Surviving You Can't Look Up</h2>
+    </div>
+
+    <div class="reveal">
+      <p class="fog-text">The scarcity is <span class="highlight">manufactured</span>.</p>
+      <p class="fog-text">America throws away <span class="highlight">30–40% of its food</span>. There are <span class="highlight">16 million empty homes</span> and <span class="highlight">650,000 people sleeping outside</span>. When they wanted a war nobody voted for, they found <span class="highlight">$1 billion a day</span>. Every day. The money exists. It just doesn't go to you.</p>
+    </div>
+
+    <div class="reveal">
+      <p class="fog-text">Poverty <span class="highlight">literally damages your brain</span>.</p>
+      <p class="fog-text">Researchers at Harvard and Princeton proved it. When you're drowning in bills and rent and "how do I eat this week" — that stress eats <span class="highlight">13 IQ points</span>. Not because you're stupid. Because your brain flips into survival mode. The part of you that plans, that dreams, that sees the big picture — it goes dark. All your processing power gets hijacked by the emergency of being alive tomorrow.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="fog-cycle">
+        Make people poor<br>
+        &darr;<br>
+        Survival mode activates<br>
+        &darr;<br>
+        Can't see the system<br>
+        &darr;<br>
+        Can't organize against it<br>
+        &darr;<br>
+        System keeps extracting<br>
+        &darr;<br>
+        People get poorer<br>
+        &darr;<br>
+        <span class="highlight">Repeat forever</span><br><br>
+        That's not a bug. <span class="highlight">That's the product.</span>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p class="fog-text">Every policy they pass does <span class="highlight">two things at once</span>. Tariffs that cost your family <span class="highlight">$1,500 a year</span>. A war burning <span class="highlight">$1 billion a day</span>. Healthcare slashed. Workers fired. Every one doesn't just take your money. It takes your <span class="highlight">ability to think</span> about the fact that they're taking your money.</p>
+      <p class="fog-text" style="font-size:clamp(18px,2.5vw,24px);margin-top:40px">The fog only works if you can't see through it.<br><span class="highlight" style="font-size:1.2em">You're about to.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE MACHINE ═══ -->
+<section class="machine-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">02 — The Machine</div>
+      <h2 class="section-title">Six Gears. One Machine.</h2>
+      <p class="section-subtitle">Media reports each as a separate story. They're not. Each gear turns the next.</p>
+    </div>
+
+    <div class="machine-grid">
+      <div class="loop-card reveal">
+        <div class="loop-header"><span class="loop-number">01</span><h3>The Starvation Loop</h3></div>
+        <ul class="loop-steps">
+          <li>Tax cuts for the rich</li>
+          <li>Medicare loses 12 years of solvency</li>
+          <li>"Entitlements are going bankrupt"</li>
+          <li>Medicaid work requirements imposed</li>
+          <li>Millions lose coverage</li>
+          <li>"Healthcare is broken — cut more"</li>
+        </ul>
+        <div class="loop-feedback"><span class="feedback-icon">&#x21BB;</span> Cuts create the crisis that justifies more cuts.</div>
+      </div>
+
+      <div class="loop-card reveal">
+        <div class="loop-header"><span class="loop-number">02</span><h3>The Competence Drain</h3></div>
+        <ul class="loop-steps">
+          <li>Fire 300,000 federal workers</li>
+          <li>Services collapse</li>
+          <li>"Government doesn't work"</li>
+          <li>Justify privatization</li>
+          <li>Contractors charge 3-5x more</li>
+          <li>"Too expensive — cut more"</li>
+        </ul>
+        <div class="loop-feedback"><span class="feedback-icon">&#x21BB;</span> Destroy competence, point at incompetence, destroy more.</div>
+      </div>
+
+      <div class="loop-card reveal">
+        <div class="loop-header"><span class="loop-number">03</span><h3>The Fear Machine</h3></div>
+        <ul class="loop-steps">
+          <li>Immigration raids increase 11x</li>
+          <li>Farm labor vanishes</li>
+          <li>Food prices spike — tariffs compound</li>
+          <li>Beef +16%, coffee +20%</li>
+          <li>2 US citizens shot dead by agents</li>
+          <li>Communities terrorized into silence</li>
+        </ul>
+        <div class="loop-feedback"><span class="feedback-icon">&#x21BB;</span> Fear suppresses wages, raises prices, funds enforcement.</div>
+      </div>
+
+      <div class="loop-card reveal">
+        <div class="loop-header"><span class="loop-number">04</span><h3>The Accountability Kill</h3></div>
+        <ul class="loop-steps">
+          <li>Delete police accountability database</li>
+          <li>EEOC stops investigating discrimination</li>
+          <li>160 journalists assaulted</li>
+          <li>NPR and PBS defunded</li>
+          <li>AP excluded, CBS sued</li>
+          <li>No oversight left standing</li>
+        </ul>
+        <div class="loop-feedback"><span class="feedback-icon">&#x21BB;</span> Kill oversight, commit more harm, no one reports it.</div>
+      </div>
+
+      <div class="loop-card reveal">
+        <div class="loop-header"><span class="loop-number">05</span><h3>The Climate Time Bomb</h3></div>
+        <ul class="loop-steps">
+          <li>Repeal EPA regulatory authority</li>
+          <li>Climate denial becomes official policy</li>
+          <li>83% of USAID budget cut</li>
+          <li>Disasters increase, FEMA gutted</li>
+          <li>Response fails</li>
+          <li>"Government doesn't work"</li>
+        </ul>
+        <div class="loop-feedback"><span class="feedback-icon">&#x21BB;</span> Accelerate the crisis, defund the response, profit from both.</div>
+      </div>
+
+      <div class="loop-card reveal">
+        <div class="loop-header"><span class="loop-number">06</span><h3>The War Machine</h3></div>
+        <ul class="loop-steps">
+          <li>Launch war without Congress</li>
+          <li>$1 billion per day burning</li>
+          <li>Gas prices spike domestically</li>
+          <li>168 schoolgirls killed in strikes</li>
+          <li>"Can't afford entitlements — we're at war"</li>
+          <li>Veterans come home to gutted VA</li>
+        </ul>
+        <div class="loop-feedback"><span class="feedback-icon">&#x21BB;</span> War spending justifies domestic cuts that hurt the troops.</div>
+      </div>
+    </div>
+
+    <div class="machine-center reveal">
+      <p>EACH LOOP FEEDS THE OTHERS.<br>THAT'S NOT CHAOS.<br><strong>THAT'S ENGINEERING.</strong></p>
+    </div>
+
+    <div class="machine-compound reveal">
+      <p>While you were reading about tariffs, they cut your healthcare.</p>
+      <p>While you were reading about healthcare, they started a war.</p>
+      <p>While you were reading about the war, they fired the people who process your tax return.</p>
+      <p class="compound-kicker">You were never supposed to see all of it at once.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE NUMBERS ═══ -->
+<section class="numbers-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">03 — The Numbers</div>
+      <h2 class="section-title">Not Opinions. Math.</h2>
+      <p class="section-subtitle">Every number links to its source. Click any of them.</p>
+    </div>
+
+    <div class="numbers-grid reveal">
+      <div class="number-card">
+        <div class="number-value">$1,500<span class="number-unit">/yr</span></div>
+        <div class="number-label">What tariffs cost your household</div>
+        <a class="number-source" href="https://budgetlab.yale.edu/research/tracking-economic-effects-tariffs" target="_blank" rel="noopener">Yale Budget Lab &rarr;</a>
+      </div>
+      <div class="number-card">
+        <div class="number-value">$1B<span class="number-unit">/day</span></div>
+        <div class="number-label">What the Iran war costs without your consent</div>
+        <a class="number-source" href="https://responsiblestatecraft.org/iran-war-costs/" target="_blank" rel="noopener">Responsible Statecraft &rarr;</a>
+      </div>
+      <div class="number-card highlight-red">
+        <div class="number-value">168</div>
+        <div class="number-label">Schoolgirls ages 7–12 killed in Minab</div>
+        <a class="number-source" href="https://www.democracynow.org/2026/3/4/nilo_tabrizy" target="_blank" rel="noopener">Democracy Now &rarr;</a>
+      </div>
+      <div class="number-card">
+        <div class="number-value">300K<span class="number-unit">+</span></div>
+        <div class="number-label">Federal workers fired. Your services gutted.</div>
+        <a class="number-source" href="https://ourpublicservice.org/publications/a-government-in-chaos-trumps-first-year-back-in-office/" target="_blank" rel="noopener">Partnership for Public Service &rarr;</a>
+      </div>
+      <div class="number-card">
+        <div class="number-value">577K</div>
+        <div class="number-label">Years of experience lost at the VA alone</div>
+        <a class="number-source" href="https://www.cbpp.org/blog/veterans-have-borne-trump-administrations-deep-cuts-to-federal-personnel" target="_blank" rel="noopener">CBPP &rarr;</a>
+      </div>
+      <div class="number-card">
+        <div class="number-value">12<span class="number-unit"> yrs</span></div>
+        <div class="number-label">Of Medicare solvency erased by tax cuts for the wealthy</div>
+        <a class="number-source" href="https://fortune.com/2026/02/24/trump-social-security-medicare-medicaid-tax-cut-obbba-insolvent/" target="_blank" rel="noopener">Fortune &rarr;</a>
+      </div>
+      <div class="number-card">
+        <div class="number-value">52,652</div>
+        <div class="number-label">VA job vacancies — including 11,000 nurses</div>
+        <a class="number-source" href="https://time.com/7270148/trump-veterans-va-fired/" target="_blank" rel="noopener">TIME &rarr;</a>
+      </div>
+      <div class="number-card highlight-red">
+        <div class="number-value">7</div>
+        <div class="number-label">Votes that let the war continue</div>
+        <a class="number-source" href="https://www.npr.org/2026/03/04/nx-s1-5735867/war-powers-congress-iran" target="_blank" rel="noopener">NPR &rarr;</a>
+      </div>
+      <div class="number-card">
+        <div class="number-value">0</div>
+        <div class="number-label">Accountability databases left standing</div>
+        <a class="number-source" href="https://civilrights.org/trump-rollbacks/" target="_blank" rel="noopener">Civil Rights &rarr;</a>
+      </div>
+      <div class="number-card featured">
+        <div class="number-value">$3,400<span class="number-unit">+</span></div>
+        <div class="number-label">Total compound cost per household per year — tariffs + gas + food + premiums</div>
+      </div>
+    </div>
+
+    <div class="compound-breakdown reveal">
+      <h3 class="breakdown-title">THE COMPOUND COST — WHAT YOU ACTUALLY PAY</h3>
+      <table class="breakdown-table">
+        <tr><td class="breakdown-item">Tariffs</td><td class="breakdown-cost">+$1,500/yr</td></tr>
+        <tr><td class="breakdown-item">Gas spike (war premium)</td><td class="breakdown-cost">+$500–800/yr</td></tr>
+        <tr><td class="breakdown-item">Food inflation</td><td class="breakdown-cost">+$1,200/yr</td></tr>
+        <tr><td class="breakdown-item">Medicare premium increase</td><td class="breakdown-cost">+$215/yr</td></tr>
+        <tr><td class="breakdown-item">Iran war (your share of $1B/day)</td><td class="breakdown-cost">$7.50/day</td></tr>
+        <tr class="breakdown-total"><td class="breakdown-item">TOTAL</td><td class="breakdown-cost">$3,400–4,000+/yr</td></tr>
+      </table>
+      <p class="breakdown-kicker">While they spent <strong>$5 billion in ONE WEEK</strong> on a war nobody voted for.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE LIE vs THE MATH ═══ -->
+<section class="lies-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">04 — The Lie vs The Math</div>
+      <h2 class="section-title">They Say Things. The Math Says Otherwise.</h2>
+    </div>
+
+    <div class="lie-block reveal">
+      <div class="the-lie"><span class="lie-label">The Lie</span><blockquote>&ldquo;He&rsquo;s fighting for the working man.&rdquo;</blockquote></div>
+      <div class="the-math"><span class="math-label">The Math</span><p><span class="highlight">$1,500/yr</span> tariff tax per household. Beef up <span class="highlight">16%</span>. Coffee up <span class="highlight">20%</span>. Gas at <span class="highlight">$3.32</span> and climbing. The working man pays for this every grocery trip. Every tank of gas. Every paycheck that buys less.</p><a class="source-link" href="https://taxfoundation.org/research/all/federal/trump-tariffs-trade-war/" target="_blank" rel="noopener">Source: Tax Foundation</a></div>
+    </div>
+
+    <div class="lie-block reveal">
+      <div class="the-lie"><span class="lie-label">The Lie</span><blockquote>&ldquo;He&rsquo;s making government efficient.&rdquo;</blockquote></div>
+      <div class="the-math"><span class="math-label">The Math</span><p><span class="highlight">577,000 years</span> of experience walked out the VA door. Replacing <span class="highlight">$80K</span> civil servants with <span class="highlight">$250K</span> contractors is not efficiency. It&rsquo;s a wealth transfer. <span class="highlight">52,652</span> VA positions unfilled. <span class="highlight">11,000</span> nurse openings.</p><a class="source-link" href="https://www.cbpp.org/blog/veterans-have-borne-trump-administrations-deep-cuts-to-federal-personnel" target="_blank" rel="noopener">Source: CBPP</a></div>
+    </div>
+
+    <div class="lie-block reveal">
+      <div class="the-lie"><span class="lie-label">The Lie</span><blockquote>&ldquo;He&rsquo;s keeping us safe.&rdquo;</blockquote></div>
+      <div class="the-math"><span class="math-label">The Math</span><p>Federal agents shot <span class="highlight">2 US citizens</span> dead. More died in ICE detention in 2025 than the <span class="highlight">prior 4 years combined</span>. <span class="highlight">6 soldiers</span> dead in Iran in one week. Food safety inspectors gutted. FEMA degraded.</p><a class="source-link" href="https://www.americanimmigrationcouncil.org/report/mass-deportation-trump-democracy/" target="_blank" rel="noopener">Source: American Immigration Council</a></div>
+    </div>
+
+    <div class="lie-block reveal">
+      <div class="the-lie"><span class="lie-label">The Lie</span><blockquote>&ldquo;He&rsquo;s protecting Social Security and Medicare.&rdquo;</blockquote></div>
+      <div class="the-math"><span class="math-label">The Math</span><p>His tax bill erased <span class="highlight">12 years</span> of Medicare solvency. SSA offices closing. Can&rsquo;t apply for benefits by phone. He&rsquo;s starving it so he can say it&rsquo;s broken. Break it, then privatize it.</p><a class="source-link" href="https://fortune.com/2026/02/24/trump-social-security-medicare-medicaid-tax-cut-obbba-insolvent/" target="_blank" rel="noopener">Source: Fortune</a></div>
+    </div>
+
+    <div class="lie-block reveal">
+      <div class="the-lie"><span class="lie-label">The Lie</span><blockquote>&ldquo;The media is the enemy.&rdquo;</blockquote></div>
+      <div class="the-math"><span class="math-label">The Math</span><p><span class="highlight">160 journalists</span> assaulted by law enforcement in 2025. When the government attacks the people who report what the government does — that&rsquo;s what every authoritarian regime in history has done. Every single one.</p><a class="source-link" href="https://www.poynter.org/reporting-editing/2025/united-states-press-freedom-donald-trump/" target="_blank" rel="noopener">Source: Poynter</a></div>
+    </div>
+
+    <div class="lie-block reveal">
+      <div class="the-lie"><span class="lie-label">The Lie</span><blockquote>&ldquo;It&rsquo;ll be over quickly.&rdquo;</blockquote></div>
+      <div class="the-math"><span class="math-label">The Math</span><p>Trump said it &ldquo;could take weeks.&rdquo; Iran closed the Strait of Hormuz — <span class="highlight">20%</span> of global oil. <span class="highlight">30,000–40,000</span> troops deployed. Largest buildup since Iraq 2003. &ldquo;Unconditional surrender&rdquo; is a bumper sticker. Iraq lasted <span class="highlight">8 years</span>.</p><a class="source-link" href="https://www.bloomberg.com/news/features/2026-03-06/iran-war-trump-rejects-peace-talks-maga-splits-on-us-israel-military-action" target="_blank" rel="noopener">Source: Bloomberg</a></div>
+    </div>
+
+    <div class="lie-block reveal">
+      <div class="the-lie"><span class="lie-label">The Lie</span><blockquote>&ldquo;Congress approved it.&rdquo;</blockquote></div>
+      <div class="the-math"><span class="math-label">The Math</span><p>Congress voted <em>against stopping it</em>. That&rsquo;s not approval — that&rsquo;s abdication. The Constitution says Congress declares war. He didn&rsquo;t ask. They didn&rsquo;t stop him. <span class="highlight">7 votes</span>. That&rsquo;s how thin the line was.</p><a class="source-link" href="https://www.npr.org/2026/02/28/nx-s1-5730203/iran-israel-trump-congress-strikes-reaction" target="_blank" rel="noopener">Source: NPR</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT ACTUALLY WORKED ═══ -->
+<section class="history-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">05 — What Actually Worked</div>
+      <h2 class="section-title">Calling Your Congressman Never Stopped a War.</h2>
+      <p class="section-subtitle">Here's what did.</p>
+    </div>
+
+    <div class="history-card reveal">
+      <h3 class="history-place">Montgomery, Alabama — 1955</h3>
+      <p class="history-text">Black people were <strong>75% of bus riders</strong>. They stopped riding. For <strong>381 days</strong>. The bus system lost <strong>$3,000 per day</strong>. They didn't ask permission. They built their own transportation — Black taxi drivers charged 10 cents, same as bus fare. The city went broke. <em>Then</em> they desegregated. Not because they grew a conscience — because they were losing money.</p>
+    </div>
+
+    <div class="history-card reveal">
+      <h3 class="history-place">South Africa — 1960–1990</h3>
+      <p class="history-text">Students pressured <strong>155 universities</strong> to divest. <strong>26 states, 22 counties, 90+ cities</strong> banned doing business with South Africa. They didn't boycott grocery stores — they moved <strong>billions</strong> out of the economy. The regime collapsed. When Mandela was asked if sanctions helped: <em>"Oh, there is no doubt."</em></p>
+    </div>
+
+    <div class="history-card reveal">
+      <h3 class="history-place">South Korea — 2016–2017</h3>
+      <p class="history-text"><strong>15.87 million people</strong> showed up. Not once — every week for <strong>20 weeks</strong>. In the cold. With candles. They didn't go home. Parliament said <em>"public sentiment will not allow the president to return."</em> Impeached <strong>234–56</strong>. Constitutional Court upheld it <strong>8–0</strong>. President removed.</p>
+    </div>
+
+    <div class="history-card reveal">
+      <h3 class="history-place">Vietnam — 1965–1975</h3>
+      <p class="history-text">The war didn't end because of phone calls. It ended because soldiers started <strong>refusing orders</strong>. Thousands went AWOL. Draft resistance was so massive they couldn't prosecute everyone. Veterans Against the War became what Nixon's chief of staff called <em>"the most dangerous organization in America."</em> When the people <strong>fighting</strong> the war say it's wrong — that's what breaks through.</p>
+    </div>
+
+    <div class="history-lesson reveal">
+      <p>None of these movements asked nicely. They made it <strong>impossible to continue business as usual</strong>. They cost the powerful money, credibility, or the ability to function. That's the only language power has ever understood.</p>
+    </div>
+
+    <div class="rule-block reveal">
+      <h3>The 3.5% Rule</h3>
+      <p>Harvard researcher <strong>Erica Chenoweth</strong> studied every major movement in modern history. When <strong>3.5%</strong> of a population engages in sustained nonviolent resistance, the government falls. Every time. <strong>No exceptions.</strong></p>
+      <p>3.5% of Americans = <strong>11.5 million people</strong>. South Korea got 15.87 million.</p>
+      <p><a href="https://www.hks.harvard.edu/centers/carr/publications/35-rule-how-small-minority-can-change-world" target="_blank" rel="noopener">Harvard Kennedy School &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SEE IT. SHARE IT. ═══ -->
+<section class="share-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">06</div>
+      <h2 class="section-title">See It. Share It.</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;text-align:center">The fog only works if people can't see the whole picture at once.<br>Now you've seen it. Show someone else.</p>
+    </div>
+
+    <p class="history-text" style="text-align:center;max-width:600px;margin:0 auto 16px">You just saw in 60 seconds what they don't want you to see in a lifetime. Every number is sourced. Every claim is linked. This isn't left vs right. <strong>This is people vs the people robbing them.</strong></p>
+
+    <p class="history-text" style="text-align:center;max-width:600px;margin:0 auto 40px">Most people only know one or two of these stories. They've never seen the machine. <strong>Show them.</strong></p>
+
+    <div class="share-buttons">
+      <button class="share-btn" onclick="copyLink()">Copy Link</button>
+      <button class="share-btn" onclick="shareX()">Share on X</button>
+      <button class="share-btn" onclick="shareFB()">Share on Facebook</button>
+      <button class="share-btn" onclick="shareReddit()">Share on Reddit</button>
+    </div>
+    <div id="copyConfirm"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Every number sourced. Every claim linked. Not partisan — arithmetic.</p>
+    <p><strong>Built with <a href="https://github.com/cokasio" style="color:var(--white);border-color:var(--white-dim)">ClarityCore</a></strong> — cross-domain intelligence engine by <a href="https://github.com/cokasio" style="color:var(--white-dim)">Context Clarity</a><br>42 public data sources. 32 analytical domains. 60 seconds of truth.</p>
+    <p>Sources: Tax Foundation, Yale Budget Lab, Pew Research, CBPP, Brookings, UNESCO, NPR, CNN, Al Jazeera,<br>Center for American Progress, PolitiFact, FactCheck.org, ACLU, Harvard Kennedy School, and 20+ additional sources.</p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Share
+const txt = "See The Machine — they keep you too broke and too tired to see it. 6 feedback loops. One system. $3,400/yr from your pocket. Every number sourced.";
+function copyLink() {
+  navigator.clipboard.writeText(location.href + '\n\n' + txt).then(() => {
+    document.getElementById('copyConfirm').textContent = 'Copied.';
+    setTimeout(() => document.getElementById('copyConfirm').textContent = '', 3000);
+  });
+}
+function shareX() { window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(txt) + '&url=' + encodeURIComponent(location.href), '_blank'); }
+function shareFB() { window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href), '_blank'); }
+function shareReddit() { window.open('https://www.reddit.com/submit?url=' + encodeURIComponent(location.href) + '&title=' + encodeURIComponent('See The Machine — What They Don\'t Want You To See At Once'), '_blank'); }
+</script>
+
+</body>
+</html>
