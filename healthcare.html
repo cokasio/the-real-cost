@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Healthcare Machine — How They Profit From Your Pain</title>
+<meta name="description" content="1 in 5 claims denied. 60-80% overturned on appeal. They know they should pay. They bet you won't fight. Every number sourced.">
+<meta property="og:title" content="The Healthcare Machine — They Profit From Your Pain">
+<meta property="og:description" content="$5.3 trillion. 100 million in debt. 1 in 5 claims denied. 60-80% overturned when you fight. They bet you won't. Every number sourced.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #EF4444;
+  --red-dark: #991B1B;
+  --red-glow: rgba(239,68,68,0.25);
+  --green: #10B981;
+  --white: #F1F5F9;
+  --white-dim: #94A3B8;
+  --gray: #475569;
+  --bg: #05050A;
+  --bg-card: #0C0C14;
+  --border: rgba(255,255,255,0.05);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--font-body);line-height:1.7;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+a{color:var(--red);text-decoration:none;border-bottom:1px solid rgba(239,68,68,0.3);transition:all 0.2s}
+a:hover{color:var(--white);border-color:var(--white)}
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+strong{color:var(--white);font-weight:700}
+
+/* ═══ HERO ═══ */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 24px;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 30%,rgba(239,68,68,0.06) 0%,transparent 70%);pointer-events:none}
+.hero-overline{font-family:var(--font-mono);font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:32px;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero h1{font-family:var(--font-display);font-size:clamp(36px,7vw,80px);font-weight:900;line-height:1.05;margin-bottom:40px;opacity:0;animation:fadeUp .8s .4s forwards}
+.hero h1 em{font-style:normal;color:var(--red);display:block;font-size:clamp(40px,8vw,90px);text-shadow:0 0 80px var(--red-glow)}
+.hero-body{font-size:clamp(16px,2.2vw,20px);color:var(--white-dim);max-width:650px;line-height:1.8;font-weight:300;opacity:0;animation:fadeUp .8s .6s forwards}
+.hero-body strong{color:var(--white)}
+.scroll-line{position:absolute;bottom:40px;left:50%;width:1px;height:48px;background:linear-gradient(to bottom,var(--gray),transparent);animation:pulse 2s infinite}
+
+/* ═══ DENIAL TICKER ═══ */
+.denial-ticker{background:var(--red-dark);padding:14px 0;overflow:hidden;border-top:2px solid var(--red);border-bottom:2px solid var(--red)}
+.ticker-track{display:flex;gap:64px;animation:tickerScroll 60s linear infinite;white-space:nowrap;width:max-content}
+.ticker-item{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--white)}
+.ticker-item b{color:#FCA5A5}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ═══ SECTIONS ═══ */
+section{padding:120px 0;position:relative}
+.section-num{font-family:var(--font-mono);font-size:11px;letter-spacing:4px;color:var(--red);text-transform:uppercase;margin-bottom:12px}
+.section-title{font-family:var(--font-display);font-size:clamp(32px,5.5vw,60px);font-weight:900;line-height:1.05;margin-bottom:16px}
+.section-subtitle{font-size:18px;color:var(--white-dim);max-width:650px;margin-bottom:48px;font-weight:300;line-height:1.8}
+.highlight{color:var(--red);font-weight:700}
+
+/* ═══ THE BET ═══ */
+.bet-section{background:linear-gradient(180deg,var(--bg) 0%,rgba(239,68,68,0.03) 50%,var(--bg) 100%)}
+.bet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:48px 0;text-align:center;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.bet-cell{padding:48px 24px;border-right:1px solid var(--border)}
+.bet-cell:last-child{border-right:none}
+.bet-value{font-family:var(--font-mono);font-size:clamp(36px,5vw,56px);font-weight:700;line-height:1;margin-bottom:12px}
+.bet-value.red{color:var(--red)}
+.bet-value.green{color:var(--green)}
+.bet-value.dim{color:var(--white-dim)}
+.bet-label{font-size:14px;color:var(--white-dim);line-height:1.6;max-width:200px;margin:0 auto}
+.bet-source{font-family:var(--font-mono);font-size:10px;color:var(--gray);display:block;margin-top:12px}
+.bet-punchline{text-align:center;padding:48px 24px;margin:0 0 48px;font-size:clamp(18px,2.5vw,26px);color:var(--white-dim);line-height:1.8;border:1px solid rgba(239,68,68,0.15);background:rgba(239,68,68,0.03);border-radius:6px}
+.fog-text{font-size:clamp(16px,2vw,19px);color:var(--white-dim);line-height:1.9;margin-bottom:28px;max-width:700px}
+
+/* ═══ MONEY MACHINE ═══ */
+.machine-section{background:var(--bg-card)}
+.flow-chain{display:flex;flex-direction:column;gap:0;margin:48px 0}
+.flow-step{display:grid;grid-template-columns:80px 1fr;gap:0;align-items:stretch;min-height:100px}
+.flow-line{display:flex;flex-direction:column;align-items:center;position:relative}
+.flow-dot{width:16px;height:16px;border-radius:50%;background:var(--red);border:3px solid var(--bg-card);z-index:2;margin-top:24px;flex-shrink:0}
+.flow-connector{width:2px;flex:1;background:linear-gradient(to bottom,var(--red),rgba(239,68,68,0.3))}
+.flow-step:last-child .flow-connector{display:none}
+.flow-content{padding:16px 24px 32px;border-left:1px solid var(--border)}
+.flow-title{font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.flow-desc{font-size:15px;color:var(--white-dim);line-height:1.8}
+.flow-stat{font-family:var(--font-mono);font-size:13px;color:var(--white);margin-top:8px;display:inline-block;background:rgba(239,68,68,0.08);padding:4px 10px;border-radius:3px}
+.flow-source{font-family:var(--font-mono);font-size:10px;color:var(--gray);display:block;margin-top:8px}
+.machine-verdict{text-align:center;padding:48px;margin:32px 0;border:2px solid rgba(239,68,68,0.2);background:rgba(239,68,68,0.03);border-radius:6px}
+.machine-verdict p{font-size:clamp(16px,2vw,20px);color:var(--white-dim);line-height:1.8;margin-bottom:12px}
+.machine-verdict strong{color:var(--red);font-size:1.1em}
+
+/* ═══ THE NUMBERS ═══ */
+.numbers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:40px 0}
+.number-card{background:var(--bg-card);border:1px solid var(--border);padding:28px 20px;border-radius:6px;transition:all .3s;position:relative;overflow:hidden}
+.number-card:hover{border-color:rgba(239,68,68,0.2);transform:translateY(-2px)}
+.number-card.highlight-red{border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04)}
+.number-card.featured{grid-column:1/-1;text-align:center;border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04);padding:40px}
+.number-value{font-family:var(--font-mono);font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--red);line-height:1;margin-bottom:8px}
+.number-unit{font-size:0.5em;color:var(--white-dim)}
+.number-label{font-size:13px;color:var(--white-dim);line-height:1.5;margin-bottom:10px}
+.number-source{font-family:var(--font-mono);font-size:10px;color:var(--gray);border-bottom:1px solid rgba(71,85,105,0.3)}
+.number-source:hover{color:var(--red)}
+
+/* ═══ CEO PAY ═══ */
+.ceo-table{width:100%;border-collapse:collapse;margin:40px 0;font-size:14px}
+.ceo-table th{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red);text-align:left;padding:12px 16px;border-bottom:2px solid rgba(239,68,68,0.2)}
+.ceo-table td{padding:16px;border-bottom:1px solid var(--border);color:var(--white-dim)}
+.ceo-table td:nth-child(2){font-family:var(--font-mono);color:var(--red);font-weight:700;font-size:16px}
+.ceo-table td:nth-child(3){font-family:var(--font-mono);color:var(--white-dim)}
+.ceo-context{text-align:center;padding:32px;margin:24px 0;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:6px;font-size:16px;color:var(--white-dim);line-height:1.8}
+
+/* ═══ VS ═══ */
+.vs-section{background:var(--bg-card)}
+.vs-block{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;padding:40px 0;border-bottom:1px solid var(--border)}
+.vs-block:last-child{border-bottom:none}
+.vs-side{text-align:center;padding:24px}
+.vs-country{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:8px}
+.vs-price{font-family:var(--font-mono);font-size:clamp(24px,4vw,40px);font-weight:700;line-height:1;margin-bottom:8px}
+.vs-price.us{color:var(--red)}
+.vs-price.them{color:var(--green)}
+.vs-drug{font-size:14px;color:var(--white-dim)}
+.vs-divider{font-family:var(--font-display);font-size:24px;color:var(--gray);font-weight:900}
+.vs-source{font-family:var(--font-mono);font-size:10px;color:var(--gray);text-align:center;margin-top:4px}
+
+/* ═══ THE SCAM ═══ */
+.scam-block{padding:40px 0;border-bottom:1px solid var(--border)}
+.scam-block:last-child{border-bottom:none}
+.scam-title{font-family:var(--font-mono);font-size:13px;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:16px}
+.scam-text{font-size:clamp(15px,1.8vw,18px);color:var(--white-dim);line-height:1.9;max-width:700px;margin-bottom:12px}
+.scam-stat{font-family:var(--font-mono);font-size:14px;color:var(--white);background:rgba(239,68,68,0.06);padding:12px 16px;border-left:3px solid var(--red);margin:16px 0;line-height:1.7}
+
+/* ═══ WHAT TO DO ═══ */
+.action-card{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:32px;margin:16px 0;transition:all .3s}
+.action-card:hover{border-color:rgba(239,68,68,0.2)}
+.action-num{font-family:var(--font-mono);font-size:11px;color:var(--red);letter-spacing:2px;margin-bottom:8px}
+.action-title{font-family:var(--font-display);font-size:clamp(20px,3vw,28px);font-weight:900;margin-bottom:12px}
+.action-text{font-size:15px;color:var(--white-dim);line-height:1.8}
+
+/* ═══ SHARE ═══ */
+.share-section{text-align:center;padding:80px 24px}
+.share-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:40px 0}
+.share-btn{font-family:var(--font-mono);font-size:12px;letter-spacing:1px;padding:14px 28px;border:1px solid var(--border);background:var(--bg-card);color:var(--white);border-radius:4px;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.share-btn:hover{border-color:var(--white);transform:translateY(-2px)}
+#copyConfirm{font-family:var(--font-mono);font-size:12px;color:var(--red);margin-top:8px}
+footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border)}
+footer p{font-family:var(--font-mono);font-size:10px;color:var(--gray);line-height:2.2}
+footer a{color:var(--gray);font-size:10px}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.8}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px){
+  section{padding:80px 0}
+  .bet-grid{grid-template-columns:1fr;gap:0}
+  .bet-cell{border-right:none;border-bottom:1px solid var(--border);padding:32px 24px}
+  .bet-cell:last-child{border-bottom:none}
+  .vs-block{grid-template-columns:1fr;gap:8px}
+  .vs-divider{display:none}
+  .numbers-grid{grid-template-columns:repeat(2,1fr)}
+  .flow-step{grid-template-columns:48px 1fr}
+}
+@media(max-width:480px){
+  .numbers-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-overline">the healthcare machine</div>
+  <h1>
+    Your loved one is sick.<br>They deny the claim.
+    <em>That's the business model.</em>
+  </h1>
+  <p class="hero-body">
+    <strong>1 in 5 claims denied.</strong> 60–80% overturned when you fight.<br>
+    They know they should pay. They bet you won't fight back.<br>
+    <strong>Every number on this page is sourced. Click any of them.</strong>
+  </p>
+  <div class="scroll-line"></div>
+</section>
+
+<!-- ═══ DENIAL TICKER ═══ -->
+<div class="denial-ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><b>1 IN 5</b> CLAIMS DENIED</span>
+    <span class="ticker-item">APPEALS WIN <b>60-80%</b> OF THE TIME</span>
+    <span class="ticker-item">FEWER THAN <b>1%</b> OF PATIENTS APPEAL</span>
+    <span class="ticker-item"><b>100 MILLION</b> AMERICANS IN MEDICAL DEBT</span>
+    <span class="ticker-item"><b>$220 BILLION</b> OWED IN MEDICAL BILLS</span>
+    <span class="ticker-item"><b>66.5%</b> OF BANKRUPTCIES ARE MEDICAL</span>
+    <span class="ticker-item">CEO PAY: <b>$26.3 MILLION</b> (UNITEDHEALTH)</span>
+    <span class="ticker-item">US DRUG PRICES: <b>2.78x</b> HIGHER THAN 33 NATIONS</span>
+    <span class="ticker-item"><b>1 IN 5</b> CLAIMS DENIED</span>
+    <span class="ticker-item">APPEALS WIN <b>60-80%</b> OF THE TIME</span>
+    <span class="ticker-item">FEWER THAN <b>1%</b> OF PATIENTS APPEAL</span>
+    <span class="ticker-item"><b>100 MILLION</b> AMERICANS IN MEDICAL DEBT</span>
+    <span class="ticker-item"><b>$220 BILLION</b> OWED IN MEDICAL BILLS</span>
+    <span class="ticker-item"><b>66.5%</b> OF BANKRUPTCIES ARE MEDICAL</span>
+    <span class="ticker-item">CEO PAY: <b>$26.3 MILLION</b> (UNITEDHEALTH)</span>
+    <span class="ticker-item">US DRUG PRICES: <b>2.78x</b> HIGHER THAN 33 NATIONS</span>
+  </div>
+</div>
+
+<!-- ═══ THE BET ═══ -->
+<section class="bet-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">01 — The Bet</div>
+      <h2 class="section-title">They Deny Your Claim. Then They Bet You'll Give Up.</h2>
+    </div>
+
+    <div class="bet-grid reveal">
+      <div class="bet-cell">
+        <div class="bet-value red">1 in 5</div>
+        <div class="bet-label">Claims denied by insurance companies</div>
+        <a class="bet-source" href="https://www.moneygeek.com/insurance/health/aca-claim-denial-rates-by-state-and-insurer/" target="_blank" rel="noopener">KFF / MoneyGeek 2024</a>
+      </div>
+      <div class="bet-cell">
+        <div class="bet-value green">60–80%</div>
+        <div class="bet-label">Of denials overturned when patients fight back</div>
+        <a class="bet-source" href="https://www.nationalnursesunited.org/press/60-80-insurance-denials-overturned-or-reversed-when-taken-independent-medical-review-new-data" target="_blank" rel="noopener">National Nurses United</a>
+      </div>
+      <div class="bet-cell">
+        <div class="bet-value dim">&lt;1%</div>
+        <div class="bet-label">Of patients who actually appeal their denial</div>
+        <a class="bet-source" href="https://www.kff.org/private-insurance/issue-brief/claims-denials-and-appeals-in-aca-marketplace-plans-in-2023/" target="_blank" rel="noopener">KFF 2023</a>
+      </div>
+    </div>
+
+    <div class="bet-punchline reveal">
+      Read that again. <strong>They deny claims they know they should pay.</strong><br>
+      Because they know <span class="highlight">99% of you will just accept it.</span><br>
+      That's not a flaw in the system. <strong>That IS the system.</strong>
+    </div>
+
+    <div class="reveal">
+      <p class="fog-text">In 2023, insurers denied <span class="highlight">73 million in-network claims</span>. Only <span class="highlight">376,527</span> were appealed. That's <span class="highlight">0.2%</span>. The other 72.6 million people paid out of pocket, went without care, or went into debt.</p>
+      <p class="fog-text">Meanwhile, the people denying your claims aren't doctors. They're <span class="highlight">non-physician insurance employees</span> overriding your doctor's medical judgment without ever examining you. The medical profession has a word for that: <span class="highlight">practicing medicine without a license</span>.</p>
+      <p class="fog-text"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10391242/" target="_blank" rel="noopener">PMC / Journal of Medicine &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE MONEY MACHINE ═══ -->
+<section class="machine-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">02 — The Money Machine</div>
+      <h2 class="section-title">Follow Your Premium Dollar.</h2>
+      <p class="section-subtitle">You pay. Here's where it actually goes.</p>
+    </div>
+
+    <div class="flow-chain">
+      <div class="flow-step reveal">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <div class="flow-title">You Pay Your Premium</div>
+          <div class="flow-desc">The top 7 insurers collected <span class="highlight">$1.7 trillion</span> from customers in 2025. That's $175 billion more than 2024.</div>
+          <div class="flow-stat">$1,700,000,000,000 collected</div>
+          <a class="flow-source" href="https://healthcareuncovered.substack.com/p/2025-big-insurances-17-trillion-year" target="_blank" rel="noopener">Healthcare Uncovered 2025</a>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <div class="flow-title">The PBM Middleman Takes a Cut</div>
+          <div class="flow-desc">3 companies control 80% of all prescriptions. The FTC found they mark up specialty generic drugs by <span class="highlight">1,000% or more</span> on 22% of drugs analyzed. Cancer drugs. HIV drugs. They buy for $70, bill you $17,710.</div>
+          <div class="flow-stat">$7.3 billion in excess PBM revenue (2017–2022)</div>
+          <a class="flow-source" href="https://www.ftc.gov/news-events/news/press-releases/2025/01/ftc-releases-second-interim-staff-report-prescription-drug-middlemen" target="_blank" rel="noopener">FTC 2025</a>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <div class="flow-title">The Hospital Charges Whatever It Wants</div>
+          <div class="flow-desc">Same blood test: <span class="highlight">$18.70</span> at one hospital, <span class="highlight">$506.00</span> at another. A 2,606% difference. There is no law requiring hospitals to follow any formula when setting prices.</div>
+          <div class="flow-stat">3x to 11.5x price variation for the same procedure</div>
+          <a class="flow-source" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9464687/" target="_blank" rel="noopener">Health Affairs / PMC 2022</a>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <div class="flow-title">Your Doctor Spends 13 Hours/Week Fighting the Insurer</div>
+          <div class="flow-desc">Instead of treating you, your doctor completes <span class="highlight">39 prior authorizations per week</span>. 93% say it delays necessary care. 89% say it causes burnout. The US spends <span class="highlight">5x more on healthcare administration</span> than other wealthy nations.</div>
+          <div class="flow-stat">$1.26 billion/year spent on prior auth paperwork</div>
+          <a class="flow-source" href="https://www.ama-assn.org/system/files/prior-authorization-survey.pdf" target="_blank" rel="noopener">AMA 2024</a>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <div class="flow-title">They Deny Your Claim</div>
+          <div class="flow-desc">1 in 5 denied. 1 in 3 doctors has seen prior auth lead to a <span class="highlight">serious adverse event</span> — hospitalization, permanent damage, or death. 78% of doctors say patients abandon treatment because the insurer said no.</div>
+          <div class="flow-stat">9% of serious adverse events = disability or death</div>
+          <a class="flow-source" href="https://www.ama-assn.org/practice-management/prior-authorization/1-3-doctors-has-seen-prior-auth-lead-serious-adverse-event" target="_blank" rel="noopener">AMA 2024</a>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <div class="flow-title">The CEO Gets Paid</div>
+          <div class="flow-desc">UnitedHealth's CEO made <span class="highlight">$26.3 million</span> in 2024. The top 6 payer CEOs split <span class="highlight">$159.4 million</span>. Elevance Health's CEO-to-worker pay ratio: <span class="highlight">370 to 1</span>.</div>
+          <div class="flow-stat">$54 billion in operating profit across the top 7</div>
+          <a class="flow-source" href="https://www.fiercehealthcare.com/special-reports/unitedhealth-ceo-andrew-witty-was-2024s-highest-paid-payer-ceo-heres-look-what" target="_blank" rel="noopener">Fierce Healthcare 2024</a>
+        </div>
+      </div>
+
+      <div class="flow-step reveal">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content">
+          <div class="flow-title">They Lobby to Keep It This Way</div>
+          <div class="flow-desc">Pharma and insurance spent <span class="highlight">$569 million lobbying in 2025</span>. Pharma is the <span class="highlight">#1 lobbying industry</span> in America. 9 out of 10 FDA commissioners leave to work for pharma companies.</div>
+          <div class="flow-stat">$569,000,000 to keep the machine running</div>
+          <a class="flow-source" href="https://www.opensecrets.org/federal-lobbying/industries/summary?id=H04" target="_blank" rel="noopener">OpenSecrets 2025</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="machine-verdict reveal">
+      <p>You pay premiums. They deny your care. Your doctor fights paperwork instead of treating you. The middlemen mark up your drugs 1,000%. The CEO makes $26 million. They spend $569 million to make sure nothing changes.</p>
+      <p><strong>That's not healthcare. That's extraction.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE NUMBERS ═══ -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">03 — The Numbers</div>
+      <h2 class="section-title">The Receipts.</h2>
+      <p class="section-subtitle">Every number links to its source. Click any of them.</p>
+    </div>
+
+    <div class="numbers-grid">
+      <div class="number-card reveal">
+        <div class="number-value">$5.3T</div>
+        <div class="number-label">US healthcare spending per year — 18% of GDP</div>
+        <a class="number-source" href="https://www.cms.gov/data-research/statistics-trends-and-reports/national-health-expenditure-data/nhe-fact-sheet" target="_blank" rel="noopener">CMS 2024 &rarr;</a>
+      </div>
+      <div class="number-card reveal">
+        <div class="number-value">2x</div>
+        <div class="number-label">What the US spends per person vs. comparable countries</div>
+        <a class="number-source" href="https://www.healthsystemtracker.org/chart-collection/health-spending-u-s-compare-countries/" target="_blank" rel="noopener">Peterson-KFF &rarr;</a>
+      </div>
+      <div class="number-card highlight-red reveal">
+        <div class="number-value">-4.1<span class="number-unit"> yrs</span></div>
+        <div class="number-label">US life expectancy vs. comparable nations. Pay more, die sooner.</div>
+        <a class="number-source" href="https://www.healthsystemtracker.org/chart-collection/u-s-life-expectancy-compare-countries/" target="_blank" rel="noopener">Peterson-KFF &rarr;</a>
+      </div>
+      <div class="number-card reveal">
+        <div class="number-value">100M</div>
+        <div class="number-label">Americans carrying medical debt right now</div>
+        <a class="number-source" href="https://kffhealthnews.org/news/article/diagnosis-debt-investigation-100-million-americans-hidden-medical-debt/" target="_blank" rel="noopener">KFF / NPR 2022 &rarr;</a>
+      </div>
+      <div class="number-card reveal">
+        <div class="number-value">$220B</div>
+        <div class="number-label">Total medical debt owed by Americans</div>
+        <a class="number-source" href="https://kffhealthnews.org/news/article/diagnosis-debt-investigation-100-million-americans-hidden-medical-debt/" target="_blank" rel="noopener">KFF / NPR 2022 &rarr;</a>
+      </div>
+      <div class="number-card highlight-red reveal">
+        <div class="number-value">66.5%</div>
+        <div class="number-label">Of all US bankruptcies are caused by medical bills</div>
+        <a class="number-source" href="https://www.abi.org/feed-item/health-care-costs-number-one-cause-of-bankruptcy-for-american-families" target="_blank" rel="noopener">Am. Journal of Public Health &rarr;</a>
+      </div>
+      <div class="number-card reveal">
+        <div class="number-value">3.4x</div>
+        <div class="number-label">US infant mortality vs. Norway</div>
+        <a class="number-source" href="https://www.ajmc.com/view/us-has-highest-infant-maternal-mortality-rates-despite-the-most-health-care-spending" target="_blank" rel="noopener">AJMC &rarr;</a>
+      </div>
+      <div class="number-card reveal">
+        <div class="number-value">9.71x</div>
+        <div class="number-label">What Americans pay for insulin vs. 33 other nations</div>
+        <a class="number-source" href="https://www.rand.org/pubs/research_reports/RRA788-2.html" target="_blank" rel="noopener">RAND / HHS 2024 &rarr;</a>
+      </div>
+      <div class="number-card reveal">
+        <div class="number-value">1,000%<span class="number-unit">+</span></div>
+        <div class="number-label">PBM markup on specialty generic drugs (cancer, HIV)</div>
+        <a class="number-source" href="https://www.ftc.gov/reports/specialty-generic-drugs-growing-profit-center-vertically-integrated-pharmacy-benefit-managers" target="_blank" rel="noopener">FTC 2025 &rarr;</a>
+      </div>
+      <div class="number-card featured reveal">
+        <div class="number-value">$0</div>
+        <div class="number-label">What medical bankruptcy costs in every other developed nation on Earth.<br>The US is the only one where this happens at scale.</div>
+        <a class="number-source" href="https://worldpopulationreview.com/country-rankings/medical-bankruptcies-by-country" target="_blank" rel="noopener">World Population Review &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CEO PAY vs. YOUR DENIED CLAIM ═══ -->
+<section class="vs-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">04 — The Pay Gap</div>
+      <h2 class="section-title">Their Pay. Your Denied Claim.</h2>
+    </div>
+
+    <table class="ceo-table reveal">
+      <thead>
+        <tr><th>CEO</th><th>Compensation</th><th>Ratio to Worker</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Andrew Witty — UnitedHealth</td><td>$26.3M</td><td>348:1</td></tr>
+        <tr><td>David Cordani — Cigna</td><td>$23.2M</td><td>279:1</td></tr>
+        <tr><td>Joseph Zubretsky — Molina</td><td>$21.9M</td><td>268:1</td></tr>
+        <tr><td>Gail Boudreaux — Elevance</td><td>$20.5M</td><td>370:1</td></tr>
+        <tr><td>David Joyner — CVS Health</td><td>$18.2M</td><td>299:1</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ceo-context reveal">
+      The average denied claim: <span class="highlight">$14,000</span>.<br>
+      Andrew Witty's compensation = <span class="highlight">1,879 denied claims</span>.<br>
+      Combined top 6 CEO pay = <span class="highlight">$159.4 million</span>.<br><br>
+      <a href="https://www.fiercehealthcare.com/special-reports/unitedhealth-ceo-andrew-witty-was-2024s-highest-paid-payer-ceo-heres-look-what" target="_blank" rel="noopener">Source: Fierce Healthcare / Becker's 2024</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ US vs. THE WORLD ═══ -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">05 — The Price Tag</div>
+      <h2 class="section-title">Same Drug. Same Molecule. Different Country.</h2>
+      <p class="section-subtitle">This is what it costs everywhere else.</p>
+    </div>
+
+    <div class="vs-block reveal">
+      <div class="vs-side">
+        <div class="vs-country">United States</div>
+        <div class="vs-price us">$99</div>
+        <div class="vs-drug">Insulin (per vial)</div>
+      </div>
+      <div class="vs-divider">vs</div>
+      <div class="vs-side">
+        <div class="vs-country">United Kingdom</div>
+        <div class="vs-price them">&lt;$10</div>
+        <div class="vs-drug">Same insulin</div>
+      </div>
+    </div>
+    <div class="vs-source"><a href="https://www.rand.org/pubs/research_reports/RRA788-2.html" target="_blank" rel="noopener">RAND / HHS 2024</a></div>
+
+    <div class="vs-block reveal">
+      <div class="vs-side">
+        <div class="vs-country">United States</div>
+        <div class="vs-price us">$200K<span style="font-size:0.5em">/yr</span></div>
+        <div class="vs-drug">Keytruda (cancer)</div>
+      </div>
+      <div class="vs-divider">vs</div>
+      <div class="vs-side">
+        <div class="vs-country">Other Nations</div>
+        <div class="vs-price them">Negotiated</div>
+        <div class="vs-drug">Government price controls</div>
+      </div>
+    </div>
+    <div class="vs-source"><a href="https://www.untravel.info/how-much-does-keytruda-cost-per-month" target="_blank" rel="noopener">Untravel 2025</a></div>
+
+    <div class="vs-block reveal">
+      <div class="vs-side">
+        <div class="vs-country">United States (All Drugs)</div>
+        <div class="vs-price us">2.78x</div>
+        <div class="vs-drug">Higher than 33 nations</div>
+      </div>
+      <div class="vs-divider">vs</div>
+      <div class="vs-side">
+        <div class="vs-country">33 OECD Nations</div>
+        <div class="vs-price them">1x</div>
+        <div class="vs-drug">Same molecules</div>
+      </div>
+    </div>
+    <div class="vs-source"><a href="https://www.rand.org/news/press/2024/02/01.html" target="_blank" rel="noopener">RAND Corporation 2024</a></div>
+
+    <div class="machine-verdict reveal" style="margin-top:48px">
+      <p>Same molecules. Same factories. Same science. The only thing different is who negotiates the price.</p>
+      <p>Every other developed nation negotiates. The US lets pharma set the price. <strong>That's not a market. That's a hostage negotiation.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE HIDDEN SCAMS ═══ -->
+<section class="vs-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">06 — The Hidden Scams</div>
+      <h2 class="section-title">The Games They Play With Your Life.</h2>
+    </div>
+
+    <div class="scam-block reveal">
+      <h3 class="scam-title">The Medical Loss Ratio Trick</h3>
+      <p class="scam-text">The ACA says insurers must spend 80–85% of premiums on actual care. Sounds good. Here's how they gamed it:</p>
+      <p class="scam-text">Profit is capped as a <span class="highlight">percentage</span>. So the only way to increase <em>absolute</em> profit is to let total costs <span class="highlight">rise</span>. 15% of $1,000 = $150. 15% of $2,000 = $300. <strong>Higher healthcare costs = higher insurance profits.</strong></p>
+      <div class="scam-stat">CVS/Caremark fills a prescription at its own pharmacy: records a $17,710 "medical claim" for a drug that costs $70 to acquire. Counted as "medical spending" — not profit.</div>
+      <p class="scam-text"><a href="https://freopp.org/oppblog/gaming-the-medical-loss-ratio-how-health-insurers-turn-consumer-protections-into-corporate-windfalls/" target="_blank" rel="noopener">Source: FREOPP &rarr;</a></p>
+    </div>
+
+    <div class="scam-block reveal">
+      <h3 class="scam-title">The Revolving Door</h3>
+      <p class="scam-text"><span class="highlight">9 out of 10</span> FDA commissioners went to work for pharmaceutical companies after leaving office (2006–2019). The people who regulate your drugs leave to get paid by the companies they just regulated.</p>
+      <p class="scam-text">In 2025, after HHS layoffs, hundreds of ex-federal health workers immediately took jobs at Eli Lilly, Pfizer, Merck, Roche, and Novartis.</p>
+      <div class="scam-stat">57% of departing FDA oncology reviewers took biopharma industry jobs.</div>
+      <p class="scam-text"><a href="https://www.statnews.com/2025/12/09/fda-revolving-door-regulator-industry-section-207/" target="_blank" rel="noopener">Source: STAT News / BMJ &rarr;</a></p>
+    </div>
+
+    <div class="scam-block reveal">
+      <h3 class="scam-title">The Prior Auth Death Toll</h3>
+      <p class="scam-text"><span class="highlight">1 in 3 doctors</span> has personally witnessed prior authorization cause a serious adverse event — hospitalization, permanent injury, or death.</p>
+      <p class="scam-text">A 58-year-old cancer patient in West Virginia. His doctor ordered proton beam therapy. The insurer denied it — <span class="highlight">"not medically necessary."</span> By the time they reversed the denial, it was too late. He died.</p>
+      <p class="scam-text">78% of doctors say patients <span class="highlight">abandon recommended treatment</span> because the insurer said no. Not because of medicine. Because of paperwork.</p>
+      <div class="scam-stat">An insurance company employee — not a doctor — overrode his physician's treatment plan without examining him. That is, by definition, practicing medicine without a license.</div>
+      <p class="scam-text"><a href="https://kffhealthnews.org/news/article/prior-authorization-denials-cancer-treatment-west-virginia-death/" target="_blank" rel="noopener">Source: KFF Health News &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT YOU CAN DO ═══ -->
+<section>
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">07 — What You Can Do</div>
+      <h2 class="section-title">They Bet You Won't Fight. Prove Them Wrong.</h2>
+    </div>
+
+    <div class="action-card reveal">
+      <div class="action-num">01</div>
+      <h3 class="action-title">Appeal Every Denial. Every Single One.</h3>
+      <p class="action-text">60–80% of denials are overturned on appeal. The insurance company is counting on you giving up. Don't. Request the <strong>specific clinical criteria</strong> they used to deny you. Ask your doctor to write a <strong>peer-to-peer review</strong> request. If your state has an <strong>external review</strong> process, use it — it's free and binding.</p>
+    </div>
+
+    <div class="action-card reveal">
+      <div class="action-num">02</div>
+      <h3 class="action-title">File With Your State Insurance Commissioner</h3>
+      <p class="action-text">Every state has one. They investigate complaints. When enough complaints stack up against an insurer, regulators act. Your complaint isn't just for you — it builds the case for everyone. <a href="https://content.naic.org/state-insurance-regulators" target="_blank" rel="noopener">Find yours here &rarr;</a></p>
+    </div>
+
+    <div class="action-card reveal">
+      <div class="action-num">03</div>
+      <h3 class="action-title">Share This Page</h3>
+      <p class="action-text">Most people only know one piece of this story. They've never seen the whole machine at once. <strong>The fog only works if people can't see through it.</strong> Every person who sees this page is one more person the denial machine can't bluff.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SEE IT. SHARE IT. ═══ -->
+<section class="share-section">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">See It. Share It.</h2>
+      <p class="section-subtitle" style="margin-left:auto;margin-right:auto;text-align:center">Someone you know is in medical debt right now.<br>Someone you know had a claim denied this month.<br><strong>Show them they're not alone. And show them they can fight.</strong></p>
+    </div>
+
+    <div class="share-buttons">
+      <button class="share-btn" onclick="copyLink()">Copy Link</button>
+      <button class="share-btn" onclick="shareX()">Share on X</button>
+      <button class="share-btn" onclick="shareFB()">Share on Facebook</button>
+      <button class="share-btn" onclick="shareReddit()">Share on Reddit</button>
+    </div>
+    <div id="copyConfirm"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Every number sourced. Every claim linked. Not partisan — arithmetic.</p>
+    <p><strong>Built with <a href="https://github.com/cokasio" style="color:var(--white);border-color:var(--white-dim)">ClarityCore</a></strong> — cross-domain intelligence engine by <a href="https://github.com/cokasio" style="color:var(--white-dim)">Context Clarity</a><br>42 public data sources. 32 analytical domains. The healthcare industry doesn't want you to see this.</p>
+    <p>Sources: KFF, AMA, FTC, RAND Corporation, CMS, OpenSecrets, Health Affairs, Peterson-KFF,<br>National Nurses United, Fierce Healthcare, STAT News, Commonwealth Fund, and 15+ additional sources.</p>
+    <p style="margin-top:12px"><a href="index.html" style="color:var(--red)">See The Machine &rarr;</a> &nbsp;|&nbsp; The full picture of what they're doing to America.</p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Share
+const txt = "The Healthcare Machine: 1 in 5 claims denied. 60-80% overturned when you fight. They bet you won't. $5.3 trillion industry. $26M CEO pay. Every number sourced.";
+function copyLink() {
+  navigator.clipboard.writeText(location.href + '\n\n' + txt).then(() => {
+    document.getElementById('copyConfirm').textContent = 'Copied.';
+    setTimeout(() => document.getElementById('copyConfirm').textContent = '', 3000);
+  });
+}
+function shareX() { window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(txt) + '&url=' + encodeURIComponent(location.href), '_blank'); }
+function shareFB() { window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href), '_blank'); }
+function shareReddit() { window.open('https://www.reddit.com/submit?url=' + encodeURIComponent(location.href) + '&title=' + encodeURIComponent('The Healthcare Machine — How They Profit From Your Pain'), '_blank'); }
+</script>
+
+</body>
+</html>
