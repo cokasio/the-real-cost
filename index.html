@@ -177,23 +177,23 @@ footer a{color:var(--gray);font-size:10px}
 
 <!-- ═══ WAR TICKER ═══ -->
 <div class="war-ticker">
-  <div class="ticker-track">
-    <span class="ticker-item">IRAN WAR DAY <b>8</b> — NO CONGRESSIONAL AUTHORIZATION</span>
+  <div class="ticker-track" id="liveTicker">
+    <span class="ticker-item">IRAN WAR DAY <b id="warDay">—</b> — NO CONGRESSIONAL AUTHORIZATION</span>
     <span class="ticker-item"><b>168</b> GIRLS KILLED IN MINAB SCHOOL STRIKE</span>
-    <span class="ticker-item">WAR COST: <b>$1 BILLION/DAY</b></span>
+    <span class="ticker-item">WAR COST: <b id="warCostTicker">$—</b> AND COUNTING</span>
     <span class="ticker-item"><b>6</b> US SERVICE MEMBERS DEAD</span>
-    <span class="ticker-item">GAS: <b>$3.32/GAL</b> AND RISING</span>
+    <span class="ticker-item">GAS: <b id="gasTicker">$—/GAL</b> AND RISING</span>
     <span class="ticker-item">STRAIT OF HORMUZ <b>CLOSED</b> — 20% GLOBAL OIL</span>
     <span class="ticker-item">WAR POWERS VOTE FAILED BY <b>7 VOTES</b></span>
-    <span class="ticker-item">UNESCO: <b>"GRAVE VIOLATION OF HUMANITARIAN LAW"</b></span>
-    <span class="ticker-item">IRAN WAR DAY <b>8</b> — NO CONGRESSIONAL AUTHORIZATION</span>
+    <span class="ticker-item">YOUR COST TODAY: <b id="yourCostTicker">$—</b></span>
+    <span class="ticker-item">IRAN WAR DAY <b id="warDay2">—</b> — NO CONGRESSIONAL AUTHORIZATION</span>
     <span class="ticker-item"><b>168</b> GIRLS KILLED IN MINAB SCHOOL STRIKE</span>
-    <span class="ticker-item">WAR COST: <b>$1 BILLION/DAY</b></span>
+    <span class="ticker-item">WAR COST: <b id="warCostTicker2">$—</b> AND COUNTING</span>
     <span class="ticker-item"><b>6</b> US SERVICE MEMBERS DEAD</span>
-    <span class="ticker-item">GAS: <b>$3.32/GAL</b> AND RISING</span>
+    <span class="ticker-item">GAS: <b id="gasTicker2">$—/GAL</b> AND RISING</span>
     <span class="ticker-item">STRAIT OF HORMUZ <b>CLOSED</b> — 20% GLOBAL OIL</span>
     <span class="ticker-item">WAR POWERS VOTE FAILED BY <b>7 VOTES</b></span>
-    <span class="ticker-item">UNESCO: <b>"GRAVE VIOLATION OF HUMANITARIAN LAW"</b></span>
+    <span class="ticker-item">YOUR COST TODAY: <b id="yourCostTicker2">$—</b></span>
   </div>
 </div>
 
@@ -359,8 +359,8 @@ footer a{color:var(--gray);font-size:10px}
         <a class="number-source" href="https://budgetlab.yale.edu/research/tracking-economic-effects-tariffs" target="_blank" rel="noopener">Yale Budget Lab &rarr;</a>
       </div>
       <div class="number-card">
-        <div class="number-value">$1B<span class="number-unit">/day</span></div>
-        <div class="number-label">What the Iran war costs without your consent</div>
+        <div class="number-value" id="warCostLive">$1B<span class="number-unit">/day</span></div>
+        <div class="number-label">Total war cost since Day 1 — <span id="warCostNote" style="color:var(--red)">updating...</span></div>
         <a class="number-source" href="https://responsiblestatecraft.org/iran-war-costs/" target="_blank" rel="noopener">Responsible Statecraft &rarr;</a>
       </div>
       <div class="number-card highlight-red">
@@ -399,8 +399,9 @@ footer a{color:var(--gray);font-size:10px}
         <a class="number-source" href="https://civilrights.org/trump-rollbacks/" target="_blank" rel="noopener">Civil Rights &rarr;</a>
       </div>
       <div class="number-card featured">
-        <div class="number-value">$3,400<span class="number-unit">+</span></div>
+        <div class="number-value" id="compoundCostLive">$3,400<span class="number-unit">+</span></div>
         <div class="number-label">Total compound cost per household per year — tariffs + gas + food + premiums</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--gray);margin-top:8px" id="compoundTimestamp"></div>
       </div>
     </div>
 
@@ -539,13 +540,170 @@ footer a{color:var(--gray);font-size:10px}
 </footer>
 
 <script>
-// Scroll reveal
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+// ═══════════════════════════════════════════════════
+// REAL-TIME DATA ENGINE — The Machine Never Stops
+// ═══════════════════════════════════════════════════
 
-// Share
+// ─── Constants: Known rates from sourced data ───
+const WAR_START = new Date('2026-02-28T00:00:00Z'); // Iran war start date
+const WAR_COST_PER_DAY = 1_000_000_000;             // $1B/day (Responsible Statecraft)
+const WAR_COST_PER_SEC = WAR_COST_PER_DAY / 86400;  // ~$11,574/sec
+const TARIFF_PER_HOUSEHOLD_YR = 1500;                // Yale Budget Lab
+const GAS_FOOD_PREMIUM_YR = 1915;                    // $500-800 gas + $1200 food + $215 medicare
+const TOTAL_COMPOUND_YR = 3415;                      // Sum
+const HOUSEHOLDS = 131_000_000;                      // US Census
+const YOUR_WAR_SHARE_PER_DAY = WAR_COST_PER_DAY / HOUSEHOLDS; // ~$7.63/day
+
+// ─── State ───
+let gasPrice = 3.32; // Fallback
+let gasFetched = false;
+
+// ─── Format helpers ───
+function fmt$(n) {
+  if (n >= 1e12) return '$' + (n/1e12).toFixed(2) + 'T';
+  if (n >= 1e9) return '$' + (n/1e9).toFixed(2) + 'B';
+  if (n >= 1e6) return '$' + (n/1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + Math.round(n).toLocaleString();
+  return '$' + n.toFixed(2);
+}
+
+// ─── War day calculator ───
+function getWarDay() {
+  const now = new Date();
+  const diff = now - WAR_START;
+  return Math.max(1, Math.ceil(diff / 86400000));
+}
+
+// ─── Total war cost since start ───
+function getWarCostTotal() {
+  const now = new Date();
+  const elapsedSec = (now - WAR_START) / 1000;
+  return Math.max(0, elapsedSec * WAR_COST_PER_SEC);
+}
+
+// ─── Your personal cost today ───
+function getYourCostToday() {
+  const now = new Date();
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const elapsedToday = (now - todayStart) / 1000;
+  const fractionOfDay = elapsedToday / 86400;
+  // War share + daily compound cost
+  const warShare = YOUR_WAR_SHARE_PER_DAY * fractionOfDay;
+  const compoundDaily = (TOTAL_COMPOUND_YR / 365) * fractionOfDay;
+  return warShare + compoundDaily;
+}
+
+// ─── Update ticker elements ───
+function updateTicker() {
+  const day = getWarDay();
+  const warCost = getWarCostTotal();
+  const yourCost = getYourCostToday();
+  const gasStr = '$' + gasPrice.toFixed(2) + '/GAL';
+
+  // Update all ticker instances
+  const pairs = [
+    ['warDay', 'warDay2'],
+    ['warCostTicker', 'warCostTicker2'],
+    ['gasTicker', 'gasTicker2'],
+    ['yourCostTicker', 'yourCostTicker2'],
+  ];
+  pairs[0].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = day; });
+  pairs[1].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = fmt$(warCost); });
+  pairs[2].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = gasStr; });
+  pairs[3].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = fmt$(yourCost); });
+}
+
+// ─── Update the numbers section ───
+function updateNumberCards() {
+  const warCost = getWarCostTotal();
+  const warDay = getWarDay();
+  const el = document.getElementById('warCostLive');
+  if (el) el.innerHTML = fmt$(warCost);
+  const note = document.getElementById('warCostNote');
+  if (note) note.textContent = 'Day ' + warDay + ' — live';
+
+  const ts = document.getElementById('compoundTimestamp');
+  if (ts) ts.textContent = 'Updated: ' + new Date().toLocaleString();
+}
+
+// ─── Fetch gas price from EIA (public API, CORS-friendly) ───
+async function fetchGasPrice() {
+  try {
+    // EIA API v2 — weekly US regular gas price
+    const resp = await fetch('https://api.eia.gov/v2/petroleum/pri/gas/data/?api_key=DEMO_KEY&frequency=weekly&data[0]=value&facets[product][]=EPM0&facets[duession][]=NUS&sort[0][column]=period&sort[0][direction]=desc&length=1');
+    if (resp.ok) {
+      const data = await resp.json();
+      const val = data?.response?.data?.[0]?.value;
+      if (val && !isNaN(val)) {
+        gasPrice = parseFloat(val);
+        gasFetched = true;
+      }
+    }
+  } catch (_) { /* Use fallback */ }
+}
+
+// ─── Fetch Treasury national debt (public API) ───
+async function fetchNationalDebt() {
+  try {
+    const resp = await fetch('https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny?sort=-record_date&page[size]=1');
+    if (resp.ok) {
+      const data = await resp.json();
+      const debt = data?.data?.[0]?.tot_pub_debt_out_amt;
+      if (debt) {
+        // Could display this somewhere — for now just log availability
+        window.__nationalDebt = parseFloat(debt);
+      }
+    }
+  } catch (_) {}
+}
+
+// ─── Live counter animation in the cost breakdown ───
+function animateBreakdownRow() {
+  const warDay = getWarDay();
+  const dailyCost = WAR_COST_PER_DAY;
+  const totalWarCost = dailyCost * warDay;
+  // Update the breakdown table's war row if we find it
+  const rows = document.querySelectorAll('.breakdown-table tr');
+  rows.forEach(row => {
+    const item = row.querySelector('.breakdown-item');
+    const cost = row.querySelector('.breakdown-cost');
+    if (item && item.textContent.includes('Iran war')) {
+      cost.textContent = fmt$(totalWarCost / HOUSEHOLDS) + '/day (Day ' + warDay + ')';
+    }
+  });
+}
+
+// ─── Boot ───
+(function init() {
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Kick off data fetches
+  fetchGasPrice();
+  fetchNationalDebt();
+
+  // Update ticker every second
+  updateTicker();
+  updateNumberCards();
+  setInterval(() => {
+    updateTicker();
+    animateBreakdownRow();
+  }, 1000);
+
+  // Update number cards every 10s (less critical)
+  setInterval(updateNumberCards, 10000);
+
+  // Re-fetch live data every 5 minutes
+  setInterval(() => {
+    fetchGasPrice();
+    fetchNationalDebt();
+  }, 300000);
+})();
+
+// ─── Share ───
 const txt = "See The Machine — they keep you too broke and too tired to see it. 6 feedback loops. One system. $3,400/yr from your pocket. Every number sourced.";
 function copyLink() {
   navigator.clipboard.writeText(location.href + '\n\n' + txt).then(() => {

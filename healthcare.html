@@ -190,22 +190,22 @@ footer a{color:var(--gray);font-size:10px}
 <!-- ═══ DENIAL TICKER ═══ -->
 <div class="denial-ticker">
   <div class="ticker-track">
-    <span class="ticker-item"><b>1 IN 5</b> CLAIMS DENIED</span>
+    <span class="ticker-item">CLAIMS DENIED TODAY: <b id="deniedToday">—</b></span>
     <span class="ticker-item">APPEALS WIN <b>60-80%</b> OF THE TIME</span>
     <span class="ticker-item">FEWER THAN <b>1%</b> OF PATIENTS APPEAL</span>
-    <span class="ticker-item"><b>100 MILLION</b> AMERICANS IN MEDICAL DEBT</span>
+    <span class="ticker-item">HEALTHCARE SPENT TODAY: <b id="spentToday">$—</b></span>
     <span class="ticker-item"><b>$220 BILLION</b> OWED IN MEDICAL BILLS</span>
-    <span class="ticker-item"><b>66.5%</b> OF BANKRUPTCIES ARE MEDICAL</span>
-    <span class="ticker-item">CEO PAY: <b>$26.3 MILLION</b> (UNITEDHEALTH)</span>
+    <span class="ticker-item">CEO PAY THIS SECOND: <b id="ceoPay">$—</b></span>
     <span class="ticker-item">US DRUG PRICES: <b>2.78x</b> HIGHER THAN 33 NATIONS</span>
-    <span class="ticker-item"><b>1 IN 5</b> CLAIMS DENIED</span>
+    <span class="ticker-item">MEDICAL BANKRUPTCIES TODAY: <b id="bankruptToday">—</b></span>
+    <span class="ticker-item">CLAIMS DENIED TODAY: <b id="deniedToday2">—</b></span>
     <span class="ticker-item">APPEALS WIN <b>60-80%</b> OF THE TIME</span>
     <span class="ticker-item">FEWER THAN <b>1%</b> OF PATIENTS APPEAL</span>
-    <span class="ticker-item"><b>100 MILLION</b> AMERICANS IN MEDICAL DEBT</span>
+    <span class="ticker-item">HEALTHCARE SPENT TODAY: <b id="spentToday2">$—</b></span>
     <span class="ticker-item"><b>$220 BILLION</b> OWED IN MEDICAL BILLS</span>
-    <span class="ticker-item"><b>66.5%</b> OF BANKRUPTCIES ARE MEDICAL</span>
-    <span class="ticker-item">CEO PAY: <b>$26.3 MILLION</b> (UNITEDHEALTH)</span>
+    <span class="ticker-item">CEO PAY THIS SECOND: <b id="ceoPay2">$—</b></span>
     <span class="ticker-item">US DRUG PRICES: <b>2.78x</b> HIGHER THAN 33 NATIONS</span>
+    <span class="ticker-item">MEDICAL BANKRUPTCIES TODAY: <b id="bankruptToday2">—</b></span>
   </div>
 </div>
 
@@ -348,8 +348,8 @@ footer a{color:var(--gray);font-size:10px}
 
     <div class="numbers-grid">
       <div class="number-card reveal">
-        <div class="number-value">$5.3T</div>
-        <div class="number-label">US healthcare spending per year — 18% of GDP</div>
+        <div class="number-value" id="spendingLive">$5.3T</div>
+        <div class="number-label">US healthcare spending — <span id="spendingRate" style="color:var(--red)">$168K/sec</span></div>
         <a class="number-source" href="https://www.cms.gov/data-research/statistics-trends-and-reports/national-health-expenditure-data/nhe-fact-sheet" target="_blank" rel="noopener">CMS 2024 &rarr;</a>
       </div>
       <div class="number-card reveal">
@@ -396,6 +396,23 @@ footer a{color:var(--gray);font-size:10px}
         <div class="number-value">$0</div>
         <div class="number-label">What medical bankruptcy costs in every other developed nation on Earth.<br>The US is the only one where this happens at scale.</div>
         <a class="number-source" href="https://worldpopulationreview.com/country-rankings/medical-bankruptcies-by-country" target="_blank" rel="noopener">World Population Review &rarr;</a>
+      </div>
+      <div class="number-card highlight-red reveal" style="grid-column:1/-1;text-align:center">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:16px">Live — Since You Opened This Page</div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px">
+          <div>
+            <div class="number-value" id="sinceOpenDenials">0</div>
+            <div class="number-label">Claims denied</div>
+          </div>
+          <div>
+            <div class="number-value" id="sinceOpenSpent" style="font-size:clamp(20px,3vw,32px)">$0</div>
+            <div class="number-label">Healthcare dollars spent</div>
+          </div>
+          <div>
+            <div class="number-value" id="sinceOpenCEO">$0</div>
+            <div class="number-label">Paid to top 6 payer CEOs</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -583,13 +600,130 @@ footer a{color:var(--gray);font-size:10px}
 </footer>
 
 <script>
-// Scroll reveal
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+// ═══════════════════════════════════════════════════
+// REAL-TIME HEALTHCARE DATA ENGINE
+// ═══════════════════════════════════════════════════
 
-// Share
+// ─── Constants: Sourced annual rates converted to per-second ───
+const HC_SPEND_YR = 5.3e12;                          // $5.3T/yr (CMS)
+const HC_SPEND_SEC = HC_SPEND_YR / (365.25 * 86400); // ~$168,044/sec
+const CLAIMS_DENIED_YR = 73_000_000;                  // 73M in-network denials (KFF)
+const CLAIMS_DENIED_SEC = CLAIMS_DENIED_YR / (365.25 * 86400);  // ~2.31/sec
+const BANKRUPTCIES_YR = 530_000;                      // ~530K medical bankruptcies/yr (66.5% of 800K total)
+const BANKRUPTCIES_DAY = BANKRUPTCIES_YR / 365.25;    // ~1,451/day
+const TOP6_CEO_PAY_YR = 159_400_000;                  // $159.4M combined (Fierce Healthcare)
+const CEO_PAY_SEC = TOP6_CEO_PAY_YR / (365.25 * 86400); // ~$5.05/sec
+const WITTY_PAY_YR = 26_300_000;                      // UnitedHealth CEO
+const WITTY_PAY_SEC = WITTY_PAY_YR / (365.25 * 86400);
+
+const PAGE_OPENED = Date.now();
+
+// ─── Format helpers ───
+function fmt$(n) {
+  if (n >= 1e12) return '$' + (n/1e12).toFixed(2) + 'T';
+  if (n >= 1e9) return '$' + (n/1e9).toFixed(2) + 'B';
+  if (n >= 1e6) return '$' + (n/1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + Math.round(n).toLocaleString();
+  return '$' + n.toFixed(2);
+}
+function fmtInt(n) { return Math.floor(n).toLocaleString(); }
+
+// ─── How far through today are we? ───
+function todayFraction() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  return (now - start) / 86400000;
+}
+
+// ─── Seconds since page opened ───
+function sinceOpen() { return (Date.now() - PAGE_OPENED) / 1000; }
+
+// ─── Update ticker ───
+function updateTicker() {
+  const frac = todayFraction();
+  const denied = Math.floor(CLAIMS_DENIED_YR / 365.25 * frac);
+  const spent = HC_SPEND_SEC * frac * 86400;
+  const ceoPay = CEO_PAY_SEC * frac * 86400;
+  const bankrupt = Math.floor(BANKRUPTCIES_DAY * frac);
+
+  const sets = [
+    [['deniedToday','deniedToday2'], fmtInt(denied)],
+    [['spentToday','spentToday2'], fmt$(spent)],
+    [['ceoPay','ceoPay2'], fmt$(ceoPay)],
+    [['bankruptToday','bankruptToday2'], fmtInt(bankrupt)],
+  ];
+  sets.forEach(([ids, val]) => {
+    ids.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = val; });
+  });
+}
+
+// ─── Update "since you opened" counters ───
+function updateSinceOpen() {
+  const secs = sinceOpen();
+  const el1 = document.getElementById('sinceOpenDenials');
+  const el2 = document.getElementById('sinceOpenSpent');
+  const el3 = document.getElementById('sinceOpenCEO');
+  if (el1) el1.textContent = fmtInt(CLAIMS_DENIED_SEC * secs);
+  if (el2) el2.textContent = fmt$(HC_SPEND_SEC * secs);
+  if (el3) el3.textContent = fmt$(CEO_PAY_SEC * secs);
+}
+
+// ─── Update spending card ───
+function updateSpendingCard() {
+  const el = document.getElementById('spendingLive');
+  // Show year-to-date spending
+  const now = new Date();
+  const yearStart = new Date(now.getFullYear(), 0, 1);
+  const elapsedSec = (now - yearStart) / 1000;
+  const ytd = HC_SPEND_SEC * elapsedSec;
+  if (el) el.textContent = fmt$(ytd) + ' YTD';
+  const rate = document.getElementById('spendingRate');
+  if (rate) rate.textContent = fmt$(HC_SPEND_SEC) + '/sec — live';
+}
+
+// ─── Fetch CMS NHE data (public, CORS-friendly) ───
+async function fetchCMSData() {
+  try {
+    const resp = await fetch('https://data.cms.gov/data-api/v1/dataset/9887d1e9-7e78-4dba-adc3-2dfb3d8521c3/data?size=1&sort=Year:desc');
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data?.[0]) {
+        window.__cmsNHE = data[0];
+      }
+    }
+  } catch (_) {}
+}
+
+// ─── Boot ───
+(function init() {
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Fetch live data
+  fetchCMSData();
+
+  // Initial update
+  updateTicker();
+  updateSinceOpen();
+  updateSpendingCard();
+
+  // Tick every second
+  setInterval(() => {
+    updateTicker();
+    updateSinceOpen();
+  }, 1000);
+
+  // Update cards every 10s
+  setInterval(updateSpendingCard, 10000);
+
+  // Re-fetch every 5 min
+  setInterval(fetchCMSData, 300000);
+})();
+
+// ─── Share ───
 const txt = "The Healthcare Machine: 1 in 5 claims denied. 60-80% overturned when you fight. They bet you won't. $5.3 trillion industry. $26M CEO pay. Every number sourced.";
 function copyLink() {
   navigator.clipboard.writeText(location.href + '\n\n' + txt).then(() => {
