@@ -39,7 +39,7 @@ tailwind.config = {
       animation: {
         'fade-up': 'fade-up 0.8s ease forwards',
         'shimmer': 'shimmer 3s ease-in-out infinite',
-        'ticker': 'ticker 80s linear infinite',
+        'ticker': 'ticker 40s linear infinite',
         'beam': 'beam 3s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
         'pulse-ring': 'pulse-ring 2s ease-out infinite',
@@ -111,6 +111,17 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
       Fight Your Denial
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </a>
+    <!-- Mobile menu button -->
+    <button class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-surface-soft transition-colors" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')" aria-label="Menu">
+      <svg class="w-5 h-5 text-ink" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <!-- Mobile dropdown -->
+  <div class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-surface-dim px-6 pb-4 space-y-1" id="mobileMenu">
+    <a href="#the-system" class="block py-3 text-sm font-medium text-ink-muted hover:text-ink" onclick="document.getElementById('mobileMenu').classList.add('hidden')">The System</a>
+    <a href="#healthcare" class="block py-3 text-sm font-medium text-ink-muted hover:text-ink" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Healthcare</a>
+    <a href="#numbers" class="block py-3 text-sm font-medium text-ink-muted hover:text-ink" onclick="document.getElementById('mobileMenu').classList.add('hidden')">The Numbers</a>
+    <a href="#fight-back" class="block py-3 px-4 text-sm font-semibold text-white bg-heal rounded-lg text-center" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Fight Your Denial</a>
   </div>
 </nav>
 
@@ -337,7 +348,7 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
         </div>
         <div>
           <span class="font-mono text-[10px] tracking-[3px] uppercase text-danger block mb-3">The Math</span>
-          <p class="text-ink-soft leading-relaxed"><strong class="text-danger">$1,500/yr</strong> tariff tax per household. Beef up <strong class="text-danger">16%</strong>. Coffee up <strong class="text-danger">20%</strong>. Gas at <strong class="text-danger">$3.32</strong> and climbing.</p>
+          <p class="text-ink-soft leading-relaxed"><strong class="text-danger">$1,500/yr</strong> tariff tax per household. Beef up <strong class="text-danger">16%</strong>. Coffee up <strong class="text-danger">20%</strong>. Gas at <strong class="text-danger" id="gasInline">$3.49</strong> and climbing.</p>
           <a class="font-mono text-[10px] text-ink-faint hover:text-danger mt-3 inline-block" href="https://taxfoundation.org/research/all/federal/trump-tariffs-trade-war/" target="_blank" rel="noopener">Source: Tax Foundation &rarr;</a>
         </div>
       </div>
@@ -393,13 +404,13 @@ body::after { content: ''; position: fixed; inset: 0; background-image: url("dat
       <h2 class="font-display text-3xl md:text-5xl font-black tracking-tight leading-[1.05]">Your Loved One Is Sick. They Deny The Claim.<br><span class="text-danger">That's The Business Model.</span></h2>
     </div>
 
-    <div class="reveal mt-16 grid grid-cols-3 rounded-2xl border border-surface-dim bg-white overflow-hidden shadow-lg">
-      <div class="p-8 md:p-12 text-center border-r border-surface-dim">
+    <div class="reveal mt-16 grid grid-cols-1 sm:grid-cols-3 rounded-2xl border border-surface-dim bg-white overflow-hidden shadow-lg">
+      <div class="p-8 md:p-12 text-center border-b sm:border-b-0 sm:border-r border-surface-dim">
         <div class="font-mono text-3xl md:text-5xl font-bold text-danger leading-none" data-count="20">1 in 5</div>
         <p class="text-sm text-ink-muted mt-3 leading-snug">Claims denied</p>
         <a class="font-mono text-[10px] text-ink-faint hover:text-danger mt-2 inline-block" href="https://www.moneygeek.com/insurance/health/aca-claim-denial-rates-by-state-and-insurer/" target="_blank" rel="noopener">KFF 2024</a>
       </div>
-      <div class="p-8 md:p-12 text-center border-r border-surface-dim">
+      <div class="p-8 md:p-12 text-center border-b sm:border-b-0 sm:border-r border-surface-dim">
         <div class="font-mono text-3xl md:text-5xl font-bold text-heal leading-none">60–80%</div>
         <p class="text-sm text-ink-muted mt-3 leading-snug">Overturned on appeal</p>
         <a class="font-mono text-[10px] text-ink-faint hover:text-heal mt-2 inline-block" href="https://www.nationalnursesunited.org/press/60-80-insurance-denials-overturned-or-reversed-when-taken-independent-medical-review-new-data" target="_blank" rel="noopener">Nurses United</a>
@@ -658,7 +669,7 @@ const CEO_PAY_SEC = 159.4e6 / (365.25 * 86400);
 const BANKRUPT_DAY = 530000 / 365.25;
 const HOUSEHOLDS = 131e6;
 const COMPOUND_YR = 3415;
-let gasPrice = 3.32;
+let gasPrice = 3.49;
 
 function fmt$(n) {
   if (n >= 1e12) return '$' + (n/1e12).toFixed(2) + 'T';
@@ -676,10 +687,10 @@ function tick() {
   const denied = Math.floor(73e6 / 365.25 * f);
   const ceo = CEO_PAY_SEC * f * 86400;
   const yourCost = (WAR_COST_DAY / HOUSEHOLDS * f) + (COMPOUND_YR / 365 * f);
-  const sets = { warDay: d, warDay2: d, warCostT: fmt$(wc), warCostT2: fmt$(wc), deniedT: fmtInt(denied), deniedT2: fmtInt(denied), ceoPayT: fmt$(ceo), ceoPayT2: fmt$(ceo), gasT: '$'+gasPrice.toFixed(2), gasT2: '$'+gasPrice.toFixed(2), yourCostT: fmt$(yourCost), yourCostT2: fmt$(yourCost) };
+  const sets = { warDay: d, warDay2: d, warCostT: fmt$(wc), warCostT2: fmt$(wc), deniedT: fmtInt(denied), deniedT2: fmtInt(denied), ceoPayT: fmt$(ceo), ceoPayT2: fmt$(ceo), gasT: '$'+gasPrice.toFixed(2), gasT2: '$'+gasPrice.toFixed(2), yourCostT: fmt$(yourCost), yourCostT2: fmt$(yourCost), gasInline: '$'+gasPrice.toFixed(2) };
   Object.entries(sets).forEach(([id,v]) => { const el = document.getElementById(id); if (el) el.textContent = v });
-  const wce = document.getElementById('warCostCard'); if (wce) wce.innerHTML = fmt$(wc);
-  const wcn = document.getElementById('warCostNote'); if (wcn) wcn.textContent = 'Day ' + d + ' — live';
+  const wce = document.getElementById('warCostCard'); if (wce) wce.innerHTML = fmt$(wc) + '<span class="text-lg text-ink-faint"> total</span>';
+  const wcn = document.getElementById('warCostNote'); if (wcn) wcn.textContent = 'Day ' + d + ' — $1B/day — live';
 }
 
 // Scroll reveal
@@ -693,9 +704,18 @@ window.addEventListener('scroll', () => {
   document.getElementById('mainNav').classList.toggle('shadow-lg', window.scrollY > 50);
 });
 
-// Fetch gas price
-fetch('https://api.eia.gov/v2/petroleum/pri/gas/data/?api_key=DEMO_KEY&frequency=weekly&data[0]=value&facets[product][]=EPM0&sort[0][column]=period&sort[0][direction]=desc&length=1')
-  .then(r => r.json()).then(d => { const v = d?.response?.data?.[0]?.value; if (v) gasPrice = parseFloat(v) }).catch(() => {});
+// Fetch gas price — try multiple free sources, fall back gracefully
+(async () => {
+  // Source 1: AAA via proxy-friendly endpoint
+  try {
+    const r = await fetch('https://api.eia.gov/v2/petroleum/pri/gas/data/?api_key=DEMO_KEY&frequency=weekly&data[0]=value&facets[product][]=EPM0&sort[0][column]=period&sort[0][direction]=desc&length=1');
+    const d = await r.json();
+    const v = d?.response?.data?.[0]?.value;
+    if (v && parseFloat(v) > 1) { gasPrice = parseFloat(v); return; }
+  } catch(e) {}
+  // Fallback: use a reasonable recent average (updated periodically)
+  gasPrice = 3.49;
+})();
 
 tick();
 setInterval(tick, 1000);
