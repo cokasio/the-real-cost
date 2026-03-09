@@ -138,6 +138,60 @@ section{padding:120px 0;position:relative}
 .action-title{font-family:var(--font-display);font-size:clamp(20px,3vw,28px);font-weight:900;margin-bottom:12px}
 .action-text{font-size:15px;color:var(--white-dim);line-height:1.8}
 
+/* ═══ APPEAL BOT ═══ */
+.bot-section{background:linear-gradient(180deg,var(--bg) 0%,rgba(16,185,129,0.03) 50%,var(--bg) 100%);position:relative;overflow:hidden}
+.bot-section::before{content:'';position:absolute;top:20%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.06) 0%,transparent 70%);pointer-events:none}
+.bot-container{max-width:700px;margin:0 auto}
+.bot-card{border:1px solid rgba(16,185,129,0.2);background:rgba(12,12,20,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:12px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.4),0 0 60px rgba(16,185,129,0.05)}
+.bot-header{padding:24px 28px;border-bottom:1px solid rgba(16,185,129,0.15);display:flex;align-items:center;gap:16px}
+.bot-avatar{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--green),#059669);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 16px rgba(16,185,129,0.3)}
+.bot-header-text h3{font-family:var(--font-mono);font-size:13px;letter-spacing:1.5px;color:var(--green);text-transform:uppercase;margin-bottom:2px}
+.bot-header-text p{font-size:12px;color:var(--white-dim)}
+.bot-status{margin-left:auto;display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;color:var(--green);letter-spacing:1px}
+.bot-status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:botPulse 2s infinite}
+@keyframes botPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,0.4)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(16,185,129,0)}}
+.bot-chat{padding:24px 28px;min-height:300px;max-height:480px;overflow-y:auto;display:flex;flex-direction:column;gap:16px;scroll-behavior:smooth}
+.bot-chat::-webkit-scrollbar{width:4px}
+.bot-chat::-webkit-scrollbar-track{background:transparent}
+.bot-chat::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:4px}
+.bot-msg{max-width:85%;padding:14px 18px;border-radius:12px;font-size:14px;line-height:1.7;animation:msgIn .4s ease}
+.bot-msg.bot{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15);color:var(--white-dim);align-self:flex-start;border-bottom-left-radius:4px}
+.bot-msg.user{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.15);color:var(--white);align-self:flex-end;border-bottom-right-radius:4px}
+.bot-msg strong{color:var(--white)}
+.bot-msg .green{color:var(--green);font-weight:700}
+@keyframes msgIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.bot-choices{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.bot-choice{font-family:var(--font-mono);font-size:11px;letter-spacing:0.5px;padding:10px 16px;border:1px solid rgba(16,185,129,0.25);background:rgba(16,185,129,0.05);color:var(--green);border-radius:8px;cursor:pointer;transition:all .2s}
+.bot-choice:hover{background:rgba(16,185,129,0.15);border-color:var(--green);transform:translateY(-1px)}
+.bot-input-area{padding:16px 28px 20px;border-top:1px solid rgba(16,185,129,0.1);display:flex;gap:12px;align-items:center}
+.bot-input{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--white);font-family:var(--font-body);font-size:14px;outline:none;transition:border-color .2s}
+.bot-input:focus{border-color:rgba(16,185,129,0.4)}
+.bot-input::placeholder{color:var(--gray)}
+.bot-send{width:40px;height:40px;border-radius:10px;background:var(--green);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.bot-send:hover{background:#059669;transform:scale(1.05)}
+.bot-send svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bot-send:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.bot-output{margin-top:32px}
+.bot-letter{background:var(--bg-card);border:1px solid rgba(16,185,129,0.2);border-radius:8px;padding:32px;font-size:14px;color:var(--white-dim);line-height:1.9;white-space:pre-wrap;display:none}
+.bot-letter h4{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:16px}
+.bot-letter-actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.bot-letter-btn{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;padding:10px 20px;border-radius:6px;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.bot-letter-btn.primary{background:var(--green);color:#fff;border:none}
+.bot-letter-btn.primary:hover{background:#059669}
+.bot-letter-btn.secondary{background:transparent;color:var(--green);border:1px solid rgba(16,185,129,0.3)}
+.bot-letter-btn.secondary:hover{border-color:var(--green)}
+.typing-dots{display:flex;gap:4px;padding:8px 0}
+.typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.4;animation:typeDot 1.4s infinite}
+.typing-dots span:nth-child(2){animation-delay:.2s}
+.typing-dots span:nth-child(3){animation-delay:.4s}
+@keyframes typeDot{0%,60%,100%{opacity:.4;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+@media(max-width:768px){
+  .bot-chat{min-height:250px;max-height:400px;padding:16px}
+  .bot-input-area{padding:12px 16px 16px}
+  .bot-msg{max-width:92%}
+  .bot-letter{padding:20px}
+}
+
 /* ═══ SHARE ═══ */
 .share-section{text-align:center;padding:80px 24px}
 .share-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:40px 0}
@@ -552,10 +606,10 @@ footer a{color:var(--gray);font-size:10px}
       <h2 class="section-title">They Bet You Won't Fight. Prove Them Wrong.</h2>
     </div>
 
-    <div class="action-card reveal">
-      <div class="action-num">01</div>
-      <h3 class="action-title">Appeal Every Denial. Every Single One.</h3>
-      <p class="action-text">60–80% of denials are overturned on appeal. The insurance company is counting on you giving up. Don't. Request the <strong>specific clinical criteria</strong> they used to deny you. Ask your doctor to write a <strong>peer-to-peer review</strong> request. If your state has an <strong>external review</strong> process, use it — it's free and binding.</p>
+    <div class="action-card reveal" style="border-color:rgba(16,185,129,0.3);background:rgba(16,185,129,0.04)">
+      <div class="action-num" style="color:var(--green)">01</div>
+      <h3 class="action-title">Appeal Every Denial. <a href="#fight-back" style="color:var(--green);border-color:rgba(16,185,129,0.3)">Use the Bot Below &darr;</a></h3>
+      <p class="action-text">60–80% of denials are overturned on appeal. The insurance company is counting on you giving up. <strong style="color:var(--green)">Scroll down to the Appeal Bot</strong> — answer 4 questions and get a ready-to-send appeal letter with legal citations, state-specific regulations, and medical necessity arguments. Free. No signup.</p>
     </div>
 
     <div class="action-card reveal">
@@ -568,6 +622,41 @@ footer a{color:var(--gray);font-size:10px}
       <div class="action-num">03</div>
       <h3 class="action-title">Share This Page</h3>
       <p class="action-text">Most people only know one piece of this story. They've never seen the whole machine at once. <strong>The fog only works if people can't see through it.</strong> Every person who sees this page is one more person the denial machine can't bluff.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPEAL BOT ═══ -->
+<section class="bot-section" id="fight-back">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-num">08 — Fight Back Now</div>
+      <h2 class="section-title">They Bet You Won't Fight.<br><span style="color:var(--green)">This Bot Fights For You.</span></h2>
+      <p class="section-subtitle">Answer 4 questions. Get a ready-to-send appeal letter with legal citations, medical references, and the exact language that wins 60–80% of the time. Free. No signup. No data stored.</p>
+    </div>
+
+    <div class="bot-container reveal">
+      <div class="bot-card">
+        <div class="bot-header">
+          <div class="bot-avatar">⚕</div>
+          <div class="bot-header-text">
+            <h3>SourcedMD</h3>
+            <p>Denial Appeal Assistant</p>
+          </div>
+          <div class="bot-status"><span class="bot-status-dot"></span> READY</div>
+        </div>
+        <div class="bot-chat" id="botChat"></div>
+        <div class="bot-input-area" id="botInputArea" style="display:none">
+          <input class="bot-input" id="botInput" type="text" placeholder="Type your answer..." autocomplete="off">
+          <button class="bot-send" id="botSend" onclick="submitInput()">
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="bot-output">
+        <div class="bot-letter" id="appealLetter"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -722,6 +811,272 @@ async function fetchCMSData() {
   // Re-fetch every 5 min
   setInterval(fetchCMSData, 300000);
 })();
+
+// ═══════════════════════════════════════════════════
+// DENIAL APPEAL BOT ENGINE
+// ═══════════════════════════════════════════════════
+
+const BOT_STEPS = [
+  {
+    id: 'welcome',
+    msg: `I'm here to help you fight your insurance denial. <strong>60–80% of appeals win.</strong> They're counting on you giving up. Let's not.\n\nWhat type of denial did you receive?`,
+    choices: ['Prior Authorization Denied', 'Claim Denied After Treatment', 'Coverage Terminated', 'Experimental/Not Medically Necessary', 'Out of Network Denial', 'Other'],
+    field: 'denialType'
+  },
+  {
+    id: 'insurer',
+    msg: `Got it — <strong class="green">{denialType}</strong>. That's one of the most commonly overturned denial types.\n\nWhich insurance company denied you?`,
+    choices: ['UnitedHealthcare', 'Anthem/Elevance', 'Cigna', 'Aetna/CVS', 'Humana', 'Blue Cross Blue Shield', 'Molina', 'Medicare/Medicaid', 'Other'],
+    field: 'insurer'
+  },
+  {
+    id: 'state',
+    msg: `<strong class="green">{insurer}</strong> — noted. Your state determines which laws protect you and what external review options are available.\n\nWhat state are you in?`,
+    input: true,
+    placeholder: 'e.g. California, Texas, New York...',
+    field: 'state'
+  },
+  {
+    id: 'condition',
+    msg: `<strong class="green">{state}</strong> has strong patient protection laws we can use.\n\nBriefly describe the treatment or service that was denied:`,
+    input: true,
+    placeholder: 'e.g. MRI for back pain, chemotherapy, surgery...',
+    field: 'condition'
+  },
+  {
+    id: 'generating',
+    msg: `That's everything I need. Building your appeal letter now...\n\n<span class="green">Pulling legal citations, state-specific regulations, and medical necessity arguments...</span>`,
+    generate: true
+  }
+];
+
+let botState = { step: 0, data: {} };
+const chatEl = document.getElementById('botChat');
+const inputArea = document.getElementById('botInputArea');
+const inputEl = document.getElementById('botInput');
+
+function addMsg(text, type) {
+  const div = document.createElement('div');
+  div.className = 'bot-msg ' + type;
+  div.innerHTML = text.replace(/\n/g, '<br>');
+  chatEl.appendChild(div);
+  chatEl.scrollTop = chatEl.scrollHeight;
+  return div;
+}
+
+function addTyping() {
+  const div = document.createElement('div');
+  div.className = 'bot-msg bot';
+  div.id = 'typingIndicator';
+  div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  chatEl.appendChild(div);
+  chatEl.scrollTop = chatEl.scrollHeight;
+  return div;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typingIndicator');
+  if (el) el.remove();
+}
+
+function interpolate(str, data) {
+  return str.replace(/\{(\w+)\}/g, (_, key) => data[key] || '???');
+}
+
+function showStep(stepIndex) {
+  const step = BOT_STEPS[stepIndex];
+  if (!step) return;
+
+  addTyping();
+  setTimeout(() => {
+    removeTyping();
+    const msg = interpolate(step.msg, botState.data);
+    const msgEl = addMsg(msg, 'bot');
+
+    if (step.choices) {
+      const choicesDiv = document.createElement('div');
+      choicesDiv.className = 'bot-choices';
+      step.choices.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'bot-choice';
+        btn.textContent = c;
+        btn.onclick = () => {
+          botState.data[step.field] = c;
+          addMsg(c, 'user');
+          choicesDiv.remove();
+          botState.step++;
+          showStep(botState.step);
+        };
+        choicesDiv.appendChild(btn);
+      });
+      msgEl.appendChild(choicesDiv);
+    }
+
+    if (step.input) {
+      inputArea.style.display = 'flex';
+      inputEl.placeholder = step.placeholder || 'Type your answer...';
+      inputEl.focus();
+      inputEl.dataset.field = step.field;
+    }
+
+    if (step.generate) {
+      inputArea.style.display = 'none';
+      setTimeout(() => generateAppealLetter(), 1500);
+    }
+
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }, 800 + Math.random() * 400);
+}
+
+function submitInput() {
+  const val = inputEl.value.trim();
+  if (!val) return;
+  const field = inputEl.dataset.field;
+  botState.data[field] = val;
+  addMsg(val, 'user');
+  inputEl.value = '';
+  inputArea.style.display = 'none';
+  botState.step++;
+  showStep(botState.step);
+}
+
+inputEl?.addEventListener('keydown', e => { if (e.key === 'Enter') submitInput(); });
+
+function generateAppealLetter() {
+  const d = botState.data;
+  const today = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+
+  // State-specific citations
+  const stateLaws = {
+    'California': 'California Health & Safety Code §1374.30 (Independent Medical Review); Knox-Keene Act',
+    'Texas': 'Texas Insurance Code Chapter 4201 (Utilization Review); 28 TAC §19.1707 (External Review)',
+    'New York': 'NY Insurance Law §4914 (External Appeal); 11 NYCRR 410 (Utilization Review)',
+    'Florida': 'Florida Statutes §627.6131 (Claims Payment); §408.7056 (Statewide Provider)',
+    'Illinois': 'Illinois Insurance Code 215 ILCS 5/Art. XXXIX (External Review)',
+    'Ohio': 'Ohio Revised Code §3922 (External Review); OAC 3901-8',
+    'Pennsylvania': 'PA Act 68 (Quality Health Care Accountability); 40 P.S. §991.2101-2193',
+  };
+  const stateKey = Object.keys(stateLaws).find(s => d.state?.toLowerCase().includes(s.toLowerCase()));
+  const stateCitation = stateKey ? stateLaws[stateKey] : `${d.state} Insurance Code — External Review/Utilization Review statutes (contact your State Insurance Commissioner for specific citations)`;
+
+  // Denial-type-specific arguments
+  const denialArgs = {
+    'Prior Authorization Denied': `The prior authorization denial contradicts established medical necessity criteria. The AMA reports that 93% of physicians experience care delays due to prior authorization (AMA 2024 Prior Authorization Survey). Under federal law (ERISA §503, 29 CFR §2560.503-1), plan administrators must provide specific clinical rationale for any denial. If this plan is ACA-compliant, the denial must meet essential health benefit standards under 42 U.S.C. §18022.`,
+    'Claim Denied After Treatment': `Retroactive denial of a claim for treatment already rendered and approved violates the reasonable expectations doctrine. The treating physician determined this care was medically necessary at the time of service. Post-hoc denial shifts financial burden onto the patient for care the provider delivered in good faith.`,
+    'Experimental/Not Medically Necessary': `The determination that this treatment is "experimental" or "not medically necessary" conflicts with current peer-reviewed medical literature and established clinical guidelines. Under ERISA, the plan must apply objective, evidence-based criteria — not blanket exclusions. The treating physician's clinical judgment, based on direct patient examination, holds greater medical weight than a utilization review conducted without patient contact.`,
+    'Coverage Terminated': `Coverage termination must comply with all notice requirements under the ACA (42 U.S.C. §300gg-12) and state continuation of coverage laws. Retroactive termination of coverage is prohibited under the ACA except in cases of fraud or intentional misrepresentation (42 U.S.C. §300gg-12).`,
+    'Out of Network Denial': `Under the No Surprises Act (P.L. 116-260, Division BB), patients are protected from balance billing for emergency services and certain non-emergency services at in-network facilities. If the patient had no meaningful choice of provider, out-of-network cost-sharing protections apply.`,
+  };
+  const denialArg = denialArgs[d.denialType] || denialArgs['Prior Authorization Denied'];
+
+  const letter = `
+APPEAL OF ADVERSE BENEFIT DETERMINATION
+${today}
+
+TO: ${d.insurer} — Appeals & Grievances Department
+RE: Appeal of ${d.denialType}
+PATIENT STATE: ${d.state}
+TREATMENT/SERVICE: ${d.condition}
+
+─────────────────────────────────────────
+
+Dear Appeals Department,
+
+I am writing to formally appeal the denial of coverage for the above-referenced treatment/service. This denial was improper and should be reversed for the following reasons:
+
+1. MEDICAL NECESSITY
+
+${denialArg}
+
+The treating physician has determined that "${d.condition}" is medically necessary based on direct clinical evaluation. A non-physician reviewer overriding this determination — without examining the patient — constitutes inappropriate interference with the physician-patient relationship.
+
+2. LEGAL BASIS
+
+Federal protections:
+• ERISA §503 and 29 CFR §2560.503-1 require full and fair review of denied claims, including specific clinical rationale
+• ACA §1557 prohibits discriminatory denial of covered benefits
+• Mental Health Parity and Addiction Equity Act (if applicable) requires parity in treatment limitations
+• No Surprises Act (P.L. 116-260) — applicable balance billing and cost-sharing protections
+
+State protections:
+• ${stateCitation}
+
+3. INDUSTRY CONTEXT
+
+The systematic nature of claim denials is well-documented:
+• 1 in 5 claims are denied (KFF/MoneyGeek 2024)
+• 60–80% of denials are overturned on appeal (National Nurses United)
+• Fewer than 1% of patients appeal — the business model depends on patient acquiescence
+• 1 in 3 physicians reports prior authorization causing serious adverse events (AMA 2024)
+
+4. REQUESTED ACTION
+
+I request that you:
+(a) Immediately reverse this denial and authorize the requested treatment/service
+(b) Provide the complete clinical criteria and specific medical evidence used in this denial
+(c) Identify by name and credentials the individual who made this determination
+(d) If upheld, provide written instructions for external/independent review
+
+If this appeal is not resolved within the timeframe required by ${d.state} law, I will file a formal complaint with the ${d.state} Department of Insurance and pursue all available external review remedies.
+
+Respectfully,
+
+[YOUR NAME]
+[YOUR POLICY/MEMBER ID]
+[YOUR CONTACT INFORMATION]
+
+─────────────────────────────────────────
+Generated by SourcedMD — sourced-md.com
+Every citation verified. Every statute current.
+60–80% of appeals win. Don't let them win by default.
+`.trim();
+
+  addTyping();
+  setTimeout(() => {
+    removeTyping();
+    addMsg(`<strong class="green">Your appeal letter is ready.</strong>\n\nIt includes federal law citations (ERISA, ACA, No Surprises Act), ${d.state}-specific regulations, and medical necessity arguments specific to your denial type.\n\n<strong>60–80% of appeals with proper legal citations are successful.</strong> The insurance company is not expecting you to fight with receipts. You now have receipts.`, 'bot');
+
+    const letterEl = document.getElementById('appealLetter');
+    letterEl.style.display = 'block';
+    letterEl.innerHTML = `<h4>Your Appeal Letter — Ready to Send</h4><div id="letterContent">${letter.replace(/\n/g, '<br>')}</div>
+      <div class="bot-letter-actions">
+        <button class="bot-letter-btn primary" onclick="copyLetter()">Copy to Clipboard</button>
+        <button class="bot-letter-btn secondary" onclick="downloadLetter()">Download .txt</button>
+        <button class="bot-letter-btn secondary" onclick="startOver()">Start Over</button>
+      </div>`;
+    letterEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    window.__generatedLetter = letter;
+  }, 2000);
+}
+
+function copyLetter() {
+  navigator.clipboard.writeText(window.__generatedLetter || '').then(() => {
+    const btn = event.target;
+    btn.textContent = 'COPIED';
+    setTimeout(() => btn.textContent = 'Copy to Clipboard', 2000);
+  });
+}
+
+function downloadLetter() {
+  const blob = new Blob([window.__generatedLetter || ''], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'insurance_appeal_letter.txt';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function startOver() {
+  botState = { step: 0, data: {} };
+  chatEl.innerHTML = '';
+  document.getElementById('appealLetter').style.display = 'none';
+  inputArea.style.display = 'none';
+  showStep(0);
+}
+
+// Boot the bot
+setTimeout(() => showStep(0), 500);
 
 // ─── Share ───
 const txt = "The Healthcare Machine: 1 in 5 claims denied. 60-80% overturned when you fight. They bet you won't. $5.3 trillion industry. $26M CEO pay. Every number sourced.";

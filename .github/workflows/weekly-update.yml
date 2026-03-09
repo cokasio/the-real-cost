@@ -1,0 +1,27 @@
+name: Weekly Data Update
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday at 6am UTC
+  workflow_dispatch: {}    # Manual trigger button
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch latest data and update pages
+        run: python3 update_data.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet && echo "No changes" && exit 0
+          git add -A
+          git commit -m "Weekly data update — $(date -u +'%Y-%m-%d')"
+          git push
